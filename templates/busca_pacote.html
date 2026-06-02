@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+
+<div class="main-wrapper">
+    <!-- Top Navbar -->
+    <header class="header-navbar d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center gap-4">
+            <h4 class="mb-0 fw-bold text-primary-cyan">Rastreio</h4>
+            <nav class="d-none d-md-flex gap-3">
+                <a class="text-decoration-none text-secondary small fw-semibold" href="#">Visão Geral</a>
+                <a class="text-decoration-none text-secondary small fw-semibold" href="#">Relatórios</a>
+                <a class="text-decoration-none text-secondary small fw-semibold" href="#">Suporte</a>
+            </nav>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="position-relative d-none d-sm-block">
+                <span class="material-symbols-outlined position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"
+                      style="font-size: 20px;">search</span>
+                <input class="form-control search-input form-control-sm" placeholder="Buscar Rastreio..."
+                       style="width: 250px;" type="text"/>
+            </div>
+            <button class="btn p-1 text-secondary">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <div class="d-flex align-items-center gap-2 border-start border-secondary-subtle ps-3">
+                <img alt="User" class="rounded-circle" height="32"
+                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPIpMimpDGILGxeCpxJIXAzS-EIVYS_OsJlivDBpMjqVANyqPbf_zc71erzBCo4rnfGESPVzG3HTx6YpXu97-Ri0cNYMrupQ_Vb5OvH81JpGBZmDX0Onb308NnFiR_uaw4HE9EsIi2wIjwmqENDz1_KA8piicjyaKBc_B6MKlPFDgShZe3cX9DYZqJsLSEuH5_8JDq1Bhskl3cJPuz1T3aelNwfSAE0AnYo0wHXPyBlP2nWy7bFO2QEMfXceeV4D_GRsKRBvvlWHTe"
+                     width="32"/>
+                <span class="small fw-semibold d-none d-md-inline">Operador #12</span>
+            </div>
+        </div>
+    </header>
+    <main class="p-4">
+        <div class="container-fluid p-0">
+            <!-- Tracking Header Card -->
+            <div class="custom-card p-4 mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <span class="text-uppercase small text-secondary fw-bold tracking-wider">Código de Rastreio</span>
+                        <div class="d-flex align-items-center gap-3 flex-wrap mt-1">
+                            <h1 class="display-5 fw-bold text-primary-cyan mb-0">#FLX-990304</h1>
+                            <span class="status-badge d-flex align-items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 18px;">local_shipping</span> Em Trânsito
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <p class="small text-secondary mb-1">Última atualização: Hoje, 14:32</p>
+                        <a class="text-primary-cyan text-decoration-none small d-inline-flex align-items-center gap-1"
+                           href="#">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">refresh</span> Atualizar
+                            dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Grid -->
+            <div class="row g-4">
+                <!-- Left Column: Map & Summary -->
+                <div class="col-xl-7">
+                    <!-- Map View -->
+                    <div class="map-container mb-4 shadow-sm border border-secondary-subtle">
+                        <svg class="position-absolute w-100 h-100" preserveaspectratio="none">
+                            <path d="M 100 400 Q 300 350 400 200 T 700 100" fill="none" opacity="0.4" stroke="#06C7CE"
+                                  stroke-dasharray="8 4" stroke-width="4"></path>
+                            <circle cx="100" cy="400" fill="#06C7CE" r="6"></circle>
+                            <circle cx="700" cy="100" fill="#FF9B52" r="6"></circle>
+                            <circle cx="450" cy="170" fill="#47e3ea" r="6"></circle>
+                            <circle class="animated-ping" cx="450" cy="170" fill="#47e3ea" opacity="0.4"
+                                    r="10"></circle>
+                        </svg>
+                        <div class="map-overlay-info">
+                            <div class="text-primary-cyan d-flex align-items-center gap-1 mb-1">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">location_on</span>
+                                <span class="small fw-bold">Localização Atual</span>
+                            </div>
+                            <h6 class="mb-0 fw-bold">Rod. Fernão Dias, KM 842</h6>
+                            <small class="text-secondary">Pouso Alegre - MG</small>
+                        </div>
+                        <div class="position-absolute bottom-0 end-0 p-3 d-flex gap-2">
+                            <button class="btn btn-dark btn-sm border-secondary-subtle"><span
+                                    class="material-symbols-outlined">zoom_in</span></button>
+                            <button class="btn btn-dark btn-sm border-secondary-subtle"><span
+                                    class="material-symbols-outlined">zoom_out</span></button>
+                            <button class="btn btn-dark btn-sm border-secondary-subtle"><span
+                                    class="material-symbols-outlined">layers</span></button>
+                        </div>
+                    </div>
+                    <!-- Info Cards Row -->
+                    <div class="row g-3">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="custom-card p-3 h-100 d-flex align-items-center gap-2">
+                                <img class="rounded-circle" height="40"
+                                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc9LCFZp2zttdjwKbecUnbgTFNBos8cIxr9uPgNu5Fw_t_AmbVSw-lC8wrLfsIruHJWVBR4J27rEo3Z9H01LhxnCtWmk67MZ-9YkYh2mE5L1V8QrbegyCqCNZwOMJce9ST2SzIdW7C8XndhpEURm-oRcYQEWEpas8RYD0mb5bAGk0SncfdNHVVc-2Q7sNz9frgIlYh1xXtcyqBXHesscd1sVi0DOI1Ft7t68FnhLlfgGYe55EDSKoFzOLAIuVUw-nrceOS8sbNhtup"
+                                     width="40"/>
+                                <div>
+                                    <div class="text-secondary small fw-medium">Motorista</div>
+                                    <div class="fw-bold small text-truncate">Ricardo Silva</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="custom-card p-3 h-100 d-flex align-items-center gap-2">
+                                <div class="bg-secondary-subtle p-2 rounded-circle text-primary-cyan d-flex">
+                                    <span class="material-symbols-outlined"
+                                          style="font-size: 20px;">local_shipping</span>
+                                </div>
+                                <div>
+                                    <div class="text-secondary small fw-medium">Veículo</div>
+                                    <div class="fw-bold small">Scania R500</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="custom-card p-3 h-100 d-flex align-items-center gap-2">
+                                <div class="bg-secondary-subtle p-2 rounded-circle text-primary-cyan d-flex">
+                                    <span class="material-symbols-outlined" style="font-size: 20px;">schedule</span>
+                                </div>
+                                <div>
+                                    <div class="text-secondary small fw-medium">ETA</div>
+                                    <div class="fw-bold small">18:45 (Hoje)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="custom-card p-3 h-100 d-flex align-items-center gap-2 orange-accent-border">
+                                <div class="bg-tertiary-container-subtle p-2 rounded-circle text-warning d-flex">
+                                    <span class="material-symbols-outlined" style="font-size: 20px;">thermostat</span>
+                                </div>
+                                <div>
+                                    <div class="text-secondary small fw-medium">Carga</div>
+                                    <div class="fw-bold small">4.2°C</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Timeline -->
+                <div class="col-xl-5">
+                    <div class="custom-card h-100 d-flex flex-column">
+                        <div class="card-header border-bottom border-secondary-subtle bg-transparent p-4 d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 fw-bold">Movimentação</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-primary-cyan">Eventos</button>
+                                <button class="btn btn-outline-secondary text-white">Detalhes</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-4 overflow-auto" style="max-height: 520px;">
+                            <div class="timeline">
+                                <!-- Event 1 -->
+                                <div class="timeline-item active">
+                                    <div class="timeline-marker"></div>
+                                    <div class="ms-2">
+                                        <small class="text-primary-cyan fw-bold">26 MAR, 2026 - 14:32</small>
+                                        <h6 class="fw-bold text-white mt-1">Saiu de uma base</h6>
+                                        <p class="text-secondary small mb-0 d-flex align-items-center gap-1">
+                                            <span class="material-symbols-outlined"
+                                                  style="font-size: 14px;">location_on</span> Cajamar - SP
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Event 2 -->
+                                <div class="timeline-item opacity-50">
+                                    <div class="timeline-marker"></div>
+                                    <div class="ms-2">
+                                        <small class="text-secondary">25 MAR, 2026 - 22:15</small>
+                                        <h6 class="fw-bold mt-1">Medido e pesado</h6>
+                                        <p class="text-secondary small mb-0">Loggi Hub - Cajamar</p>
+                                    </div>
+                                </div>
+                                <!-- Event 3 -->
+                                <div class="timeline-item opacity-50">
+                                    <div class="timeline-marker"></div>
+                                    <div class="ms-2">
+                                        <small class="text-secondary">25 MAR, 2026 - 21:30</small>
+                                        <h6 class="fw-bold mt-1">Conferido</h6>
+                                        <p class="text-secondary small mb-0">Base Operacional</p>
+                                    </div>
+                                </div>
+                                <!-- Event 4 -->
+                                <div class="timeline-item opacity-50">
+                                    <div class="timeline-marker"></div>
+                                    <div class="ms-2">
+                                        <small class="text-secondary">25 MAR, 2026 - 18:00</small>
+                                        <h6 class="fw-bold mt-1">Conferido</h6>
+                                        <p class="text-secondary small mb-0">Extrema - MG</p>
+                                    </div>
+                                </div>
+                                <!-- Event 5 -->
+                                <div class="timeline-item opacity-50">
+                                    <div class="timeline-marker"></div>
+                                    <div class="ms-2">
+                                        <small class="text-secondary">25 MAR, 2026 - 14:20</small>
+                                        <h6 class="fw-bold mt-1">Coletado</h6>
+                                        <p class="text-secondary small mb-0">Extrema - MG</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer border-top border-secondary-subtle bg-transparent p-3 d-flex justify-content-between align-items-center">
+                            <button class="btn btn-link text-primary-cyan text-decoration-none p-0 small fw-bold d-flex align-items-center gap-1">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">print</span> Exportar
+                                Histórico
+                            </button>
+                            <button class="btn btn-link text-secondary text-decoration-none p-0 small">Ver mais
+                                eventos...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Action Cards -->
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="custom-card p-4 h-100 bg-opacity-10 bg-secondary">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined text-primary-cyan">support_agent</span>
+                            <h6 class="text-uppercase fw-bold mb-0 small">Suporte Logístico</h6>
+                        </div>
+                        <p class="text-secondary small">Falar diretamente com o monitoramento da frota para este
+                            envio.</p>
+                        <button class="btn btn-outline-cyan w-100 mt-2 py-2">Abrir Chamado</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-card p-4 h-100 bg-opacity-10 bg-secondary">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined text-primary-cyan">description</span>
+                            <h6 class="text-uppercase fw-bold mb-0 small">Documentação (NF-e)</h6>
+                        </div>
+                        <p class="text-secondary small">Acessar e fazer download do DANFE e XML vinculados a esta
+                            carga.</p>
+                        <button class="btn btn-outline-cyan w-100 mt-2 py-2">Visualizar Docs</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-card p-4 h-100 orange-accent-border bg-opacity-10 bg-secondary">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined text-warning">warning</span>
+                            <h6 class="text-uppercase fw-bold mb-0 small">Gerenciamento de Risco</h6>
+                        </div>
+                        <p class="text-secondary small">Visualizar alertas de segurança e compliance para esta rota.</p>
+                        <button class="btn btn-warning text-dark fw-bold w-100 mt-2 py-2">Ver Protocolo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

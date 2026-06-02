@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('cadastro_usuario')}}" method="post">
+            <label>
+                Nome:
+                <input placeholder="Digite o nome" name="form-nome" class="form-control">
+            </label>
+            <label>
+                E-mail:
+                <input placeholder="Digite o e-mail" name="form-email" class="form-control">
+            </label>
+            <label>
+                Senha:
+                <input placeholder="Digite a senha" name="form-senha" class="form-control">
+            </label>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock conteudo %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+<div class="d-flex flex-column mw-100">
+        <!-- Bento Stats Grid -->
+        <div class="d-flex row g-4 mb-5 w-100 h-50 justify-content-between">
+            <!-- Stat 1 -->
+            <div class="col-12 col-md-3">
+                <div class="card-custom h-100">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="stat-icon-wrapper">
+                            <span class="material-symbols-outlined text-info">package_2</span>
+                        </div>
+                        <span class="badge-stat"
+                              style="background: rgba(6, 199, 206, 0.1); color: var(--primary-color);">+12%</span>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-size: 24px;">1,284</h3>
+                    <div class="text-muted text-uppercase small fw-semibold" style="letter-spacing: 0.1em;">Active
+                        Shipments
+                    </div>
+                </div>
+            </div>
+            <!-- Stat 2 (Alert) -->
+            <div class="col-12 col-md-3">
+                <div class="card-custom h-100" style="border-left: 4px solid var(--accent-orange);">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="stat-icon-wrapper" style="background: #311300;">
+                            <span class="material-symbols-outlined text-warning">warning</span>
+                        </div>
+                        <span class="badge-stat"
+                              style="background: rgba(255, 155, 82, 0.1); color: var(--accent-orange);">Urgent</span>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-size: 24px;">14</h3>
+                    <div class="text-muted text-uppercase small fw-semibold" style="letter-spacing: 0.1em;">Critical
+                        Delays
+                    </div>
+                </div>
+            </div>
+            <!-- Stat 3 (Progress) -->
+            <div class="col-12 col-md-3">
+                <div class="card-custom h-100">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="stat-icon-wrapper">
+                            <span class="material-symbols-outlined text-info">local_shipping</span>
+                        </div>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-size: 24px;">92.4%</h3>
+                    <div class="text-muted text-uppercase small fw-semibold mb-3" style="letter-spacing: 0.1em;">Fleet
+                        Utilization
+                    </div>
+                    <div class="progress" style="height: 4px; background: var(--bg-color);">
+                        <div class="progress-bar bg-info" style="width: 92.4%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Shipments Table Section -->
+    <div class=" div_tabela_shipments table-container justify-content-center shadow-lg mb-5" >
+        <div class="p-4 d-flex flex-md-row justify-content-between align-items-md-center gap-3"
+             style="background: rgba(10, 95, 98, 0.3); border-bottom: 1px solid var(--border-color);">
+            <div class="d-flex align-items-center gap-3">
+                <h2 class="h5 mb-0 fw-bold">Live Shipments</h2>
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill"
+                     style="background: var(--bg-color); border: 1px solid var(--border-color);">
+                    <div class="bg-info rounded-circle" style="width: 6px; height: 6px;"></div>
+                    <span class="text-info fw-black text-uppercase" style="font-size: 10px;">Live</span>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="position-relative">
+                <span class="material-symbols-outlined position-absolute top-50 start-0 translate-middle-y ps-3 text-muted"
+                      style="font-size: 18px;">search</span>
+                    <input class="form-control bg-dark border-0 text-white ps-5 py-2" placeholder="Search ID..."
+                           style="background-color: var(--bg-color) !important; border: 1px solid var(--border-color) !important; font-size: 14px; width: 220px;"
+                           type="text"/>
+                </div>
+                <button class="btn btn-outline-secondary border-secondary border-opacity-25 text-muted p-2">
+                    <span class="material-symbols-outlined">filter_list</span>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive custom-scrollbar">
+            <table class="table table-dark table-hover mb-0">
+                <thead>
+                <tr>
+                    <th>Tracking ID</th>
+                    <th>Origin / Dest</th>
+                    <th>Vehicle Info</th>
+                    <th>ETA</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>#TRK-990304</td>
+                    <td>Berlin, GER</td>
+                    <td>Scania R500</td>
+                    <td>atrasou(3d)</td>
+                    <td>entrgue</td>
+                </tr>
+                <tr>
+                    <td>#TRK-990304</td>
+                    <td>Berlin, GER</td>
+                    <td>Scania R500</td>
+                    <td>atrasou(3d)</td>
+                    <td>entrgue</td>
+                </tr>
+                <tr>
+                    <td>#TRK-990304</td>
+                    <td>Berlin, GER</td>
+                    <td>Scania R500</td>
+                    <td>atrasou(3d)</td>
+                    <td>entrgue</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
