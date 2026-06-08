@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold underline_azul mb-1">Gestão de Clientes</h2>
+            <small class="text-muted">Base de parceiros e clientes logísticos</small>
+        </div>
+
+        <button
+                class="flex-1 md:flex-none btn-primary-custom flex items-center justify-center gap-2"
+                data-bs-toggle="modal"
+                data-bs-target="#modalNovoCliente">
+            <span class="material-symbols-outlined text-lg">add</span>
+            Novo Cliente
+        </button>
+    </div>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <small class="text-muted text-uppercase fw-bold">Clientes Ativos</small>
+                <h2 class="fw-bold mt-2">1.284</h2>
+                <span class="text-info small">+12% este mês</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <small class="text-muted text-uppercase fw-bold">Novos Clientes</small>
+                <h2 class="fw-bold mt-2">42</h2>
+                <span class="text-info small">Cadastros recentes</span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-custom">
+                <small class="text-muted text-uppercase fw-bold">Pagamentos Pendentes</small>
+                <h2 class="fw-bold mt-2 text-warning">R$ 14.200</h2>
+                <span class="text-warning small">8 contas abertas</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-container">
+
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
+             style="border-color: var(--border-color)!important;">
+
+            <h5 class="mb-0 underline_azul fw-bold">
+                Base de Clientes
+            </h5>
+
+            <input class="form-control w-auto"
+                   placeholder="Buscar cliente...">
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table mb-0">
+
+                <thead>
+                <tr>
+                    <th>CLIENTE</th>
+                    <th>CNPJ</th>
+                    <th>TIER</th>
+                    <th>STATUS</th>
+                    <th>VOLUME MENSAL</th>
+                    <th class="text-end">AÇÕES</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr>
+                    <td><strong>TechCargo Solutions</strong></td>
+                    <td>12.345.678/0001-90</td>
+                    <td><span class="status-pill text-warning">Gold</span></td>
+                    <td><span class="status-pill text-info">Ativo</span></td>
+                    <td>R$ 145.200</td>
+                    <td class="text-end">⋮</td>
+                </tr>
+
+                <tr class="row-alt">
+                    <td><strong>RapidLog Express</strong></td>
+                    <td>98.765.432/0001-21</td>
+                    <td><span class="status-pill text-secondary">Silver</span></td>
+                    <td><span class="status-pill text-info">Ativo</span></td>
+                    <td>R$ 82.100</td>
+                    <td class="text-end">⋮</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Nordeste Shipping</strong></td>
+                    <td>45.001.223/0001-44</td>
+                    <td><span class="status-pill text-warning">Bronze</span></td>
+                    <td><span class="status-pill text-danger">Inativo</span></td>
+                    <td>R$ 12.400</td>
+                    <td class="text-end">⋮</td>
+                </tr>
+
+                <tr class="row-alt">
+                    <td><strong>Global Linkages</strong></td>
+                    <td>22.111.333/0001-55</td>
+                    <td><span class="status-pill text-warning">Gold</span></td>
+                    <td><span class="status-pill text-info">Ativo</span></td>
+                    <td>R$ 310.000</td>
+                    <td class="text-end">⋮</td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal Novo Cliente -->
+<div class="modal fade" id="modalNovoCliente" tabindex="-1" aria-labelledby="modalNovoClienteLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"
+             style="background-color:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+
+            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
+                <h5 class="modal-title fw-bold" id="modalNovoClienteLabel">
+                    Cadastrar Novo Cliente
+                </h5>
+
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <form method="POST" action="/clientes/cadastrar">
+
+                <div class="modal-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Razão Social
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="razao_social"
+                                   required
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Nome Fantasia
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="nome_fantasia"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                CNPJ
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="cnpj"
+                                   required
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Inscrição Estadual
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="ie"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                E-mail
+                            </label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   name="email"
+                                   required
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Telefone
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="telefone"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Cidade
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="cidade"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">
+                                Estado
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="estado"
+                                   maxlength="2"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">
+                                CEP
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="cep"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold">
+                                Endereço
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="endereco"
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Plano
+                            </label>
+
+                            <select class="form-select"
+                                    name="plano"
+                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+
+                                <option value="Bronze">
+                                    Bronze
+                                </option>
+
+                                <option value="Silver">
+                                    Silver
+                                </option>
+
+                                <option value="Gold">
+                                    Gold
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                Status
+                            </label>
+
+                            <select class="form-select"
+                                    name="status"
+                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+
+                                <option value="Ativo">
+                                    Ativo
+                                </option>
+
+                                <option value="Inativo">
+                                    Inativo
+                                </option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer border-top"
+                     style="border-color:#1A6B6E !important;">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit"
+                            class="btn btn-primary-custom">
+                        Salvar Cliente
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
