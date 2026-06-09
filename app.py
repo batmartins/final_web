@@ -97,10 +97,18 @@ def rastreio():
 
 @app.route('/busca_pacote')
 def busca_pacote():
-    return (render_template('busca_pacote.html')
-@app.route('/galpao'))
+    return (render_template('busca_pacote.html'))
+@app.route('/galpao')
 def galpao():
     return render_template('galpao.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/cliente')
+def cliente():
+    return render_template('clientes.html')
 
 
 if __name__ == '__main__':

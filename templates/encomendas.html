@@ -1,73 +1,112 @@
+{% extends 'base.html' %}
+
 {% block conteudo %}
 
 <div class="container-fluid">
 
-    <!-- Título -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
-            <h2 class="fw-bold underline_azul mb-0">Gestão de Encomendas</h2>
-            <small class="text-muted">Controle de remessas e rastreamentos</small>
+            <h2 class="fw-bold underline_azul mb-1">Central de Encomendas</h2>
+            <small class="text-muted">Monitoramento e gerenciamento de remessas em tempo real</small>
         </div>
 
         <button class="btn-primary-custom"
                 data-bs-toggle="modal"
                 data-bs-target="#modalNovaEncomenda">
+            <span class="material-symbols-outlined align-middle me-1">add</span>
             Nova Encomenda
         </button>
     </div>
 
-    <!-- Cards -->
-    <div class="row g-3 mb-4">
+    <!-- Estatísticas -->
+    <div class="row g-4 mb-4">
 
-        <div class="col-md-3">
-            <div class="card-custom">
-                <div class="stat-icon-wrapper">
-                    <span class="material-symbols-outlined text-info">
-                        inventory_2
-                    </span>
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">
+                            Total de Encomendas
+                        </small>
+                        <h2 class="fw-bold mt-2 mb-0">1.284</h2>
+                        <small class="text-info">
+                            +8% este mês
+                        </small>
+                    </div>
+
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">
+                            inventory_2
+                        </span>
+                    </div>
                 </div>
-
-                <h3 class="fw-bold">1.284</h3>
-                <small class="text-muted">Total de Encomendas</small>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card-custom">
-                <div class="stat-icon-wrapper">
-                    <span class="material-symbols-outlined text-info">
-                        local_shipping
-                    </span>
-                </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">
+                            Em Trânsito
+                        </small>
+                        <h2 class="fw-bold mt-2 mb-0">742</h2>
+                        <small class="text-info">
+                            57% do total
+                        </small>
+                    </div>
 
-                <h3 class="fw-bold">742</h3>
-                <small class="text-muted">Em Trânsito</small>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">
+                            local_shipping
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card-custom">
-                <div class="stat-icon-wrapper">
-                    <span class="material-symbols-outlined text-success">
-                        check_circle
-                    </span>
-                </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">
+                            Entregues
+                        </small>
+                        <h2 class="fw-bold mt-2 mb-0">497</h2>
+                        <small class="text-success">
+                            Entregas concluídas
+                        </small>
+                    </div>
 
-                <h3 class="fw-bold">497</h3>
-                <small class="text-muted">Entregues</small>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-success">
+                            check_circle
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card-custom">
-                <div class="stat-icon-wrapper">
-                    <span class="material-symbols-outlined text-warning">
-                        warning
-                    </span>
-                </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">
+                            Atrasadas
+                        </small>
+                        <h2 class="fw-bold mt-2 mb-0">45</h2>
+                        <small class="text-warning">
+                            Requer atenção
+                        </small>
+                    </div>
 
-                <h3 class="fw-bold">45</h3>
-                <small class="text-muted">Atrasadas</small>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-warning">
+                            warning
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -76,15 +115,26 @@
     <!-- Busca -->
     <div class="card-custom mb-4">
 
-        <div class="row g-3">
+        <div class="row g-3 align-items-center">
 
-            <div class="col-md-8">
+            <div class="col-lg-8">
                 <input type="text"
                        class="form-control"
-                       placeholder="Buscar código, cliente ou destino...">
+                       placeholder="Buscar código de rastreio, cliente ou destino..."
+                       style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-lg-2">
+                <select class="form-select"
+                        style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                    <option>Todos</option>
+                    <option>Em Trânsito</option>
+                    <option>Entregue</option>
+                    <option>Atrasada</option>
+                </select>
+            </div>
+
+            <div class="col-lg-2">
                 <button class="btn-primary-custom w-100">
                     Buscar
                 </button>
@@ -97,8 +147,25 @@
     <!-- Tabela -->
     <div class="table-container">
 
-        <div class="p-3 border-bottom border-secondary">
-            <h5 class="mb-0">Lista de Encomendas</h5>
+        <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
+             style="border-color: var(--border-color)!important;">
+
+            <div>
+                <h5 class="fw-bold underline_azul mb-0">
+                    Lista de Encomendas
+                </h5>
+                <small class="text-muted">
+                    Últimas movimentações registradas
+                </small>
+            </div>
+
+            <button class="btn btn-sm btn-outline-info">
+                <span class="material-symbols-outlined align-middle">
+                    download
+                </span>
+                Exportar
+            </button>
+
         </div>
 
         <div class="table-responsive">
@@ -106,81 +173,90 @@
             <table class="table align-middle mb-0">
 
                 <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Cliente</th>
-                    <th>Origem</th>
-                    <th>Destino</th>
-                    <th>Status</th>
-                    <th>Previsão</th>
-                    <th>Ações</th>
-                </tr>
+                    <tr>
+                        <th>RASTREIO</th>
+                        <th>CLIENTE</th>
+                        <th>ORIGEM</th>
+                        <th>DESTINO</th>
+                        <th>STATUS</th>
+                        <th>PREVISÃO</th>
+                        <th class="text-end">AÇÕES</th>
+                    </tr>
                 </thead>
 
                 <tbody>
 
-                <tr>
-                    <td class="tracking-id">FLX990304</td>
-                    <td>TechCargo Solutions</td>
-                    <td>São Paulo/SP</td>
-                    <td>Curitiba/PR</td>
+                    <tr>
+                        <td class="tracking-id">FLX990304</td>
+                        <td><strong>TechCargo Solutions</strong></td>
+                        <td>São Paulo/SP</td>
+                        <td>Curitiba/PR</td>
+                        <td>
+                            <span class="status-pill text-info">
+                                Em Trânsito
+                            </span>
+                        </td>
+                        <td>12/06/2026</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">
+                                Ver
+                            </button>
+                        </td>
+                    </tr>
 
-                    <td>
-                        <span class="status-pill text-info">
-                            Em Trânsito
-                        </span>
-                    </td>
+                    <tr class="row-alt">
+                        <td class="tracking-id">FLX990305</td>
+                        <td><strong>RapidLog Express</strong></td>
+                        <td>Campinas/SP</td>
+                        <td>Recife/PE</td>
+                        <td>
+                            <span class="status-pill text-success">
+                                Entregue
+                            </span>
+                        </td>
+                        <td>08/06/2026</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">
+                                Ver
+                            </button>
+                        </td>
+                    </tr>
 
-                    <td>12/06/2026</td>
+                    <tr>
+                        <td class="tracking-id">FLX990306</td>
+                        <td><strong>Global Linkages</strong></td>
+                        <td>Santos/SP</td>
+                        <td>Fortaleza/CE</td>
+                        <td>
+                            <span class="status-pill text-warning">
+                                Atrasada
+                            </span>
+                        </td>
+                        <td>06/06/2026</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">
+                                Ver
+                            </button>
+                        </td>
+                    </tr>
 
-                    <td>
-                        <button class="btn btn-sm btn-outline-info">
-                            Ver
-                        </button>
-                    </td>
-                </tr>
-
-                <tr class="row-alt">
-                    <td class="tracking-id">FLX990305</td>
-                    <td>RapidLog Express</td>
-                    <td>Campinas/SP</td>
-                    <td>Recife/PE</td>
-
-                    <td>
-                        <span class="status-pill text-success">
-                            Entregue
-                        </span>
-                    </td>
-
-                    <td>08/06/2026</td>
-
-                    <td>
-                        <button class="btn btn-sm btn-outline-info">
-                            Ver
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="tracking-id">FLX990306</td>
-                    <td>Global Linkages</td>
-                    <td>Santos/SP</td>
-                    <td>Fortaleza/CE</td>
-
-                    <td>
-                        <span class="status-pill text-warning">
-                            Atrasada
-                        </span>
-                    </td>
-
-                    <td>06/06/2026</td>
-
-                    <td>
-                        <button class="btn btn-sm btn-outline-info">
-                            Ver
-                        </button>
-                    </td>
-                </tr>
+                    <tr class="row-alt">
+                        <td class="tracking-id">FLX990307</td>
+                        <td><strong>Flash Importações</strong></td>
+                        <td>Rio de Janeiro/RJ</td>
+                        <td>Brasília/DF</td>
+                        <td>
+                            <span class="status-pill text-info">
+                                Em Trânsito
+                            </span>
+                        </td>
+                        <td>14/06/2026</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">
+                                Ver
+                            </button>
+                        </td>
+                    </tr>
 
                 </tbody>
 
@@ -222,70 +298,37 @@
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Cliente
-                            </label>
-
-                            <input type="text"
-                                   name="cliente"
-                                   class="form-control">
+                            <label class="form-label">Cliente</label>
+                            <input type="text" name="cliente" class="form-control">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Código de Rastreio
-                            </label>
-
-                            <input type="text"
-                                   name="codigo"
-                                   class="form-control">
+                            <label class="form-label">Código de Rastreio</label>
+                            <input type="text" name="codigo" class="form-control">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Origem
-                            </label>
-
-                            <input type="text"
-                                   name="origem"
-                                   class="form-control">
+                            <label class="form-label">Origem</label>
+                            <input type="text" name="origem" class="form-control">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Destino
-                            </label>
-
-                            <input type="text"
-                                   name="destino"
-                                   class="form-control">
+                            <label class="form-label">Destino</label>
+                            <input type="text" name="destino" class="form-control">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Peso
-                            </label>
-
-                            <input type="text"
-                                   name="peso"
-                                   class="form-control">
+                            <label class="form-label">Peso</label>
+                            <input type="text" name="peso" class="form-control">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Previsão de Entrega
-                            </label>
-
-                            <input type="date"
-                                   name="previsao"
-                                   class="form-control">
+                            <label class="form-label">Previsão de Entrega</label>
+                            <input type="date" name="previsao" class="form-control">
                         </div>
 
                         <div class="col-12">
-                            <label class="form-label">
-                                Observações
-                            </label>
-
+                            <label class="form-label">Observações</label>
                             <textarea class="form-control"
                                       rows="4"
                                       name="observacoes"></textarea>
@@ -314,7 +357,6 @@
             </form>
 
         </div>
-
 
     </div>
 

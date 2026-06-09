@@ -4,82 +4,92 @@
 
 <div class="container-fluid">
 
-    <!-- Cards Resumo -->
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+        <div>
+            <h2 class="fw-bold underline_azul mb-1">
+                Dashboard Operacional
+            </h2>
+            <small class="text-muted">
+                Monitoramento logístico em tempo real
+            </small>
+        </div>
+
+        <button class="btn-primary-custom"
+                data-bs-toggle="modal"
+                data-bs-target="#modalRelatorio">
+            <span class="material-symbols-outlined align-middle me-1">
+                analytics
+            </span>
+            Gerar Relatório
+        </button>
+
+    </div>
+
+    <!-- Cards -->
     <div class="row g-4 mb-4">
 
-        <!-- Total Galpões -->
-        <div class="col-md-4">
-            <div class="custom-card p-4 h-100">
-                <div class="d-flex justify-content-between">
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <small class="text-secondary text-uppercase fw-bold">Total de Galpões</small>
-                        <h2 class="fw-bold text-primary-cyan mt-2">24</h2>
-                        <small class="text-success">
-                            <span class="material-symbols-outlined align-middle">trending_up</span>
-                            +2 em expansão
-                        </small>
+                        <small class="text-muted text-uppercase fw-bold">Remessas Ativas</small>
+                        <h2 class="fw-bold mt-2 mb-0">1.284</h2>
+                        <small class="text-info">+12% este mês</small>
                     </div>
-
-                    <div class="icon-box">
-                        <span class="material-symbols-outlined text-primary-cyan">
-                            warehouse
-                        </span>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">inventory_2</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Capacidade -->
-        <div class="col-md-4">
-            <div class="custom-card p-4 h-100">
-                <div class="d-flex justify-content-between">
-                    <div class="w-100">
-                        <small class="text-secondary text-uppercase fw-bold">
-                            Capacidade Global
-                        </small>
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">Atrasos Críticos</small>
+                        <h2 class="fw-bold mt-2 mb-0 text-warning">14</h2>
+                        <small class="text-warning">Atenção necessária</small>
+                    </div>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-warning">warning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <h2 class="fw-bold text-primary-cyan mt-2">82%</h2>
-
-                        <div class="progress mt-3">
-                            <div class="progress-bar bg-info"
-                                 role="progressbar"
-                                 style="width:82%">
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">Utilização Frota</small>
+                        <div class="mt-2 mb-1">
+                            <h2 class="fw-bold mb-1">92.4%</h2>
+                            <div class="progress" style="height:6px;background:#033C3E;">
+                                <div class="progress-bar bg-info" style="width:92.4%"></div>
                             </div>
                         </div>
+                        <small class="text-info">Alta eficiência</small>
                     </div>
-
-                    <div class="icon-box">
-                        <span class="material-symbols-outlined text-primary-cyan">
-                            inventory
-                        </span>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">local_shipping</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Incidentes -->
-        <div class="col-md-4">
-            <div class="custom-card p-4 h-100">
-                <div class="d-flex justify-content-between">
+        <div class="col-lg-3 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <small class="text-secondary text-uppercase fw-bold">
-                            Incidentes Críticos
-                        </small>
-
-                        <h2 class="fw-bold text-warning mt-2">03</h2>
-
-                        <small class="text-warning">
-                            <span class="material-symbols-outlined align-middle">
-                                warning
-                            </span>
-                            Atenção necessária
-                        </small>
+                        <small class="text-muted text-uppercase fw-bold">Rotas Ativas</small>
+                        <h2 class="fw-bold mt-2 mb-0">842</h2>
+                        <small class="text-info">Operacionais</small>
                     </div>
-
-                    <div class="icon-box">
-                        <span class="material-symbols-outlined text-warning">
-                            report_problem
-                        </span>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">route</span>
                     </div>
                 </div>
             </div>
@@ -87,88 +97,337 @@
 
     </div>
 
-    <!-- Tabela -->
-    <div class="custom-card overflow-hidden">
+    <!-- Conteúdo Principal -->
+    <div class="row g-4">
 
-        <div class="card-header d-flex justify-content-between align-items-center p-4">
-            <h5 class="mb-0 fw-bold text-primary-cyan">
-                Gestão de Galpões
-            </h5>
+        <!-- Tabela -->
+        <div class="col-lg-8">
+            <div class="table-container">
 
-            <div>
-                <button class="btn btn-outline-cyan btn-sm">
-                    <span class="material-symbols-outlined align-middle">
-                        filter_list
-                    </span>
-                    Filtrar
-                </button>
+                <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
+                     style="border-color:var(--border-color)!important;">
+                    <div>
+                        <h5 class="fw-bold underline_azul mb-0">Remessas ao Vivo</h5>
+                        <small class="text-muted">
+                            <span class="me-1" style="color:#06C7CE;">●</span> LIVE
+                        </small>
+                    </div>
+                    <div class="d-flex gap-2 align-items-center">
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               placeholder="Buscar ID..."
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;width:160px;">
+                        <button class="btn btn-sm btn-outline-info">
+                            <span class="material-symbols-outlined align-middle" style="font-size:16px;">tune</span>
+                        </button>
+                    </div>
+                </div>
 
-                <button class="btn btn-primary-cyan btn-sm">
-                    <span class="material-symbols-outlined align-middle">
-                        add
-                    </span>
-                    Novo
-                </button>
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>TRACKING ID</th>
+                                <th>ORIGEM / DEST.</th>
+                                <th>VEÍCULO</th>
+                                <th>ETA</th>
+                                <th>STATUS</th>
+                                <th class="text-end">AÇÕES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tracking-id">#TRK-99021</td>
+                                <td>
+                                    São Paulo, SP<br>
+                                    <small class="text-muted">Curitiba, PR</small>
+                                </td>
+                                <td>Volvo FH16 (SP-2291)</td>
+                                <td>14:20 (in 2h)</td>
+                                <td><span class="status-pill text-info">Em Trânsito</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-info">Ver</button>
+                                </td>
+                            </tr>
+                            <tr class="row-alt">
+                                <td class="tracking-id">#TRK-88219</td>
+                                <td>
+                                    Campinas, SP<br>
+                                    <small class="text-muted">Recife, PE</small>
+                                </td>
+                                <td>Scania R500 (SP-4410)</td>
+                                <td><span class="text-warning">Delayed (~1h)</span></td>
+                                <td><span class="status-pill text-warning">Exceção</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-info">Ver</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tracking-id">#TRK-77114</td>
+                                <td>
+                                    Santos, SP<br>
+                                    <small class="text-muted">Brasília, DF</small>
+                                </td>
+                                <td>DAF XF (SP-9902)</td>
+                                <td>Arrived</td>
+                                <td><span class="status-pill text-success">Entregue</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-info">Ver</button>
+                                </td>
+                            </tr>
+                            <tr class="row-alt">
+                                <td class="tracking-id">#TRK-66305</td>
+                                <td>
+                                    Rio de Janeiro, RJ<br>
+                                    <small class="text-muted">Fortaleza, CE</small>
+                                </td>
+                                <td>Scania R500 (RJ-1234)</td>
+                                <td>09:30 (amanhã)</td>
+                                <td><span class="status-pill text-info">Em Trânsito</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-info">Ver</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center px-4 py-3"
+                     style="border-top:1px solid var(--border-color);">
+                    <small class="text-muted">Mostrando 4 de 1.284 entradas</small>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-sm btn-outline-info">Prev</button>
+                        <button class="btn btn-sm btn-info text-dark fw-bold px-3">1</button>
+                        <button class="btn btn-sm btn-outline-info">2</button>
+                        <button class="btn btn-sm btn-outline-info">Next</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <div class="table-responsive">
+        <!-- Painel Lateral -->
+        <div class="col-lg-4 d-flex flex-column gap-4">
 
-            <table class="table table-dark align-middle mb-0">
+            <!-- Atividade Recente -->
+            <div class="card-custom">
+                <h5 class="underline_azul fw-bold mb-4">Atividade Recente</h5>
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Localização</th>
-                        <th>Capacidade</th>
-                        <th>Carga Atual</th>
-                        <th>Status</th>
-                        <th class="text-end">Ações</th>
-                    </tr>
-                </thead>
+                <div class="border-bottom pb-3 mb-3" style="border-color:var(--border-color)!important;">
+                    <div class="d-flex gap-2 align-items-start">
+                        <span style="font-size:18px;">📦</span>
+                        <div>
+                            <div>Pacote #TRK-99021 recebido</div>
+                            <small class="text-muted">WH-SAO-001 · agora</small>
+                        </div>
+                    </div>
+                </div>
 
-                <tbody>
+                <div class="border-bottom pb-3 mb-3" style="border-color:var(--border-color)!important;">
+                    <div class="d-flex gap-2 align-items-start">
+                        <span style="font-size:18px;">🚚</span>
+                        <div>
+                            <div>Saída para entrega em Curitiba</div>
+                            <small class="text-muted">#TRK-66305 · 5 min atrás</small>
+                        </div>
+                    </div>
+                </div>
 
-                    <tr>
-                        <td class="fw-bold">WH-SAO-001</td>
-                        <td>São Paulo - SP</td>
-                        <td>12.500 m²</td>
+                <div class="border-bottom pb-3 mb-3" style="border-color:var(--border-color)!important;">
+                    <div class="d-flex gap-2 align-items-start">
+                        <span style="font-size:18px;">⚠️</span>
+                        <div>
+                            <div class="text-warning">Atraso detectado · #TRK-88219</div>
+                            <small class="text-muted">Campinas → Recife · 12 min atrás</small>
+                        </div>
+                    </div>
+                </div>
 
-                        <td width="200">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="progress flex-grow-1">
-                                    <div class="progress-bar bg-info"
-                                         style="width:94%">
-                                    </div>
-                                </div>
+                <div class="border-bottom pb-3 mb-3" style="border-color:var(--border-color)!important;">
+                    <div class="d-flex gap-2 align-items-start">
+                        <span style="font-size:18px;">🏢</span>
+                        <div>
+                            <div>Galpão Recife atualizou estoque</div>
+                            <small class="text-muted">WH-REC-002 · 18 min atrás</small>
+                        </div>
+                    </div>
+                </div>
 
-                                <small>94%</small>
-                            </div>
-                        </td>
+                <div>
+                    <div class="d-flex gap-2 align-items-start">
+                        <span style="font-size:18px;">✅</span>
+                        <div>
+                            <div class="text-success">Entrega confirmada #TRK-77114</div>
+                            <small class="text-muted">Brasília, DF · 32 min atrás</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <td>
-                            <span class="badge bg-info">
-                                Operacional
-                            </span>
-                        </td>
+            <!-- Galpões -->
+            <div class="card-custom">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="underline_azul fw-bold mb-0">Galpões</h5>
+                    <a href="/galpao" class="btn btn-sm btn-outline-info">Ver todos</a>
+                </div>
 
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-link text-info">
-                                <span class="material-symbols-outlined">
-                                    more_vert
-                                </span>
-                            </button>
-                        </td>
-                    </tr>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="fw-bold">WH-SAO-001</small>
+                        <small class="text-info">94%</small>
+                    </div>
+                    <div class="progress" style="height:5px;background:#033C3E;">
+                        <div class="progress-bar bg-info" style="width:94%"></div>
+                    </div>
+                </div>
 
-                </tbody>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="fw-bold">WH-CUR-012</small>
+                        <small class="text-info">68%</small>
+                    </div>
+                    <div class="progress" style="height:5px;background:#033C3E;">
+                        <div class="progress-bar bg-info" style="width:68%"></div>
+                    </div>
+                </div>
 
-            </table>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="fw-bold">WH-BHZ-003</small>
+                        <small class="text-danger">98%</small>
+                    </div>
+                    <div class="progress" style="height:5px;background:#033C3E;">
+                        <div class="progress-bar bg-danger" style="width:98%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <small class="fw-bold">WH-RJO-004</small>
+                        <small class="text-warning">15%</small>
+                    </div>
+                    <div class="progress" style="height:5px;background:#033C3E;">
+                        <div class="progress-bar bg-warning" style="width:15%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="card-custom">
+                <h5 class="underline_azul fw-bold mb-3">Sistema</h5>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <div class="rounded-circle bg-info"
+                         style="width:10px;height:10px;box-shadow:0 0 6px #06C7CE;"></div>
+                    <span class="fw-bold text-info">Operacional</span>
+                </div>
+                <small class="text-muted">Todos os serviços funcionando normalmente.</small>
+            </div>
 
         </div>
 
     </div>
 
+</div>
+
+<!-- Modal Gerar Relatório -->
+<div class="modal fade" id="modalRelatorio" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"
+             style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+
+            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
+                <h5 class="modal-title fw-bold">
+                    <span class="material-symbols-outlined align-middle me-2">analytics</span>
+                    Gerar Relatório
+                </h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Tipo de Relatório</label>
+                        <select class="form-select"
+                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                            <option>Remessas por período</option>
+                            <option>Desempenho de entregas</option>
+                            <option>Ocupação de galpões</option>
+                            <option>Clientes por volume</option>
+                            <option>Atrasos e ocorrências</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Formato de Saída</label>
+                        <select class="form-select"
+                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                            <option>PDF</option>
+                            <option>Excel (.xlsx)</option>
+                            <option>CSV</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Data Início</label>
+                        <input type="date" class="form-control"
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Data Fim</label>
+                        <input type="date" class="form-control"
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Galpão</label>
+                        <select class="form-select"
+                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                            <option value="">Todos</option>
+                            <option>WH-SAO-001</option>
+                            <option>WH-CUR-012</option>
+                            <option>WH-BHZ-003</option>
+                            <option>WH-RJO-004</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Status</label>
+                        <select class="form-select"
+                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                            <option value="">Todos</option>
+                            <option>Em Trânsito</option>
+                            <option>Entregue</option>
+                            <option>Atrasado</option>
+                            <option>Exceção</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-bold">Observações</label>
+                        <textarea class="form-control" rows="3"
+                                  placeholder="Alguma observação adicional para o relatório..."
+                                  style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer" style="border-color:#1A6B6E;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn-primary-custom">
+                    <span class="material-symbols-outlined align-middle me-1" style="font-size:18px;">
+                        download
+                    </span>
+                    Gerar e Baixar
+                </button>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 {% endblock %}

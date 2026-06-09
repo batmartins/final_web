@@ -1,99 +1,162 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>FlashLog</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <!-- Bootstrap 5 CSS -->
-     <link rel="stylesheet" href="/static/style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
-          rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-          rel="stylesheet"/>
-
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 </head>
+
 <body>
-<!-- Top Navigation Bar -->
+
+<!-- Top Navbar -->
 <nav class="navbar navbar-custom fixed-top px-3">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
-            <span class="material-symbols-outlined text-info" style="font-size: 28px;">local_shipping</span>
-            <span class="fw-black text-info text-uppercase"
-                  style="letter-spacing: 0.15em; font-size: 20px; font-family: 'Manrope', sans-serif;">FlashLog</span>
-        </div>
-        <div class="d-flex align-items-center gap-4">
-            <div class="navbar-desktop-links d-flex gap-2">
-                <a class="nav-link-custom active" href="#">Operations</a>
 
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined text-info" style="font-size:28px;">local_shipping</span>
+            <span class="fw-black text-info text-uppercase"
+                  style="letter-spacing:0.15em;font-size:20px;font-family:'Manrope',sans-serif;">
+                FlashLog
+            </span>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <div class="navbar-desktop-links d-flex gap-1">
+                <a class="nav-link-custom active" href="{{ url_for('rastreio') }}">Operations</a>
+                <a class="nav-link-custom" href="#">Network</a>
+                <a class="nav-link-custom" href="#">Reports</a>
             </div>
             <button class="btn p-2 rounded-circle border-0 text-info">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
+            <div class="d-flex align-items-center gap-2"
+                 style="background:#054D50;border:1px solid #1A6B6E;border-radius:6px;padding:6px 12px;">
+                <span class="material-symbols-outlined text-info" style="font-size:18px;">person</span>
+                <span style="font-size:13px;font-weight:600;color:#dde4e4;">
+                    {{ current_user.nome }}
+                </span>
+            </div>
         </div>
+
     </div>
 </nav>
 
-
-
-<!-- Sidebar Navigation -->
+<!-- Sidebar -->
 <aside class="sidebar">
-    <div class="px-4 py-3">
-        <div class="d-flex align-items-center gap-3 mb-4">
-            <div class="rounded-circle d-flex align-items-center justify-content-center"
-                 style="width: 40px; height: 40px; background: #194e51; border: 1px solid var(--border-color);">
-                <span class="material-symbols-outlined text-info">person</span>
+    <div class="px-3 py-3 d-flex flex-column h-100">
+
+        <!-- Perfil -->
+        <div class="d-flex align-items-center gap-3 mb-4 px-3"
+             style="background:#054D50;border:1px solid #1A6B6E;border-radius:8px;padding:12px;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                 style="width:38px;height:38px;background:#033C3E;border:1px solid #1A6B6E;">
+                <span class="material-symbols-outlined text-info" style="font-size:20px;">person</span>
             </div>
-            <div>
-                <div class="text-info fw-bold" style="font-size: 14px;">{{current_user.nome}}</div>
-                <div class="text-muted text-uppercase" style="font-size: 10px; letter-spacing: -0.02em;">
-                    {{current_user.email}}
+            <div style="overflow:hidden;">
+                <div class="text-info fw-bold" style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                    {{ current_user.nome }}
                 </div>
-                <a href="{{url_for('logout')}}">SAIR</a>
+                <div class="text-muted" style="font-size:10px;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                    {{ current_user.email }}
+                </div>
             </div>
         </div>
-        <nav class="nav flex-column gap-1">
-            <a class="sidebar-link active" href="{{url_for('rastreio')}}">
+
+        <!-- Menu -->
+        <nav class="nav flex-column gap-1 flex-grow-1">
+
+            <div class="text-muted text-uppercase px-3 mb-1" style="font-size:10px;letter-spacing:0.08em;">
+                Principal
+            </div>
+
+            <a class="sidebar-link {% if request.endpoint == 'rastreio' %}active{% endif %}"
+               href="{{ url_for('rastreio') }}">
                 <span class="material-symbols-outlined">dashboard</span>
                 <span>Dashboard</span>
             </a>
-            <a class="sidebar-link active" href="{{url_for('busca_pacote')}}">
+
+            <a class="sidebar-link {% if request.endpoint == 'busca_pacote' %}active{% endif %}"
+               href="{{ url_for('busca_pacote') }}">
                 <span class="material-symbols-outlined">search</span>
                 <span>Rastreio</span>
             </a>
 
-            <a class="sidebar-link active" href="{{url_for('galpao')}}">
-                <span class="material-symbols-outlined">search</span>
-                <span>Rastreio</span>
+            <div class="text-muted text-uppercase px-3 mt-3 mb-1" style="font-size:10px;letter-spacing:0.08em;">
+                Operações
+            </div>
+
+            <a class="sidebar-link {% if request.endpoint == 'galpao' %}active{% endif %}"
+               href="{{ url_for('galpao') }}">
+                <span class="material-symbols-outlined">warehouse</span>
+                <span>Galpões</span>
+            </a>
+
+            <a class="sidebar-link {% if request.endpoint == 'cliente' %}active{% endif %}"
+               href="{{ url_for('cliente') }}">
+                <span class="material-symbols-outlined">groups</span>
+                <span>Clientes</span>
             </a>
 
         </nav>
-    </div>
-    <div class="mt-auto p-4 border-top border-secondary border-opacity-25">
-        <div class="p-3 rounded-2"
-             style="background-color: rgba(5, 77, 80, 0.5); border: 1px solid var(--border-color);">
-            <div class="text-muted text-uppercase mb-2" style="font-size: 10px;">System Status</div>
-            <div class="d-flex align-items-center gap-2">
-                <div class="rounded-circle bg-info" style="width: 8px; height: 8px;"></div>
-                <span class="text-info fw-bold" style="font-size: 12px;">Operational</span>
+
+        <!-- Status + Sair -->
+        <div class="mt-auto border-top pt-3" style="border-color:#1A6B6E !important;">
+
+            <div class="p-3 rounded-2 mb-3"
+                 style="background:rgba(5,77,80,0.5);border:1px solid #1A6B6E;">
+                <div class="text-muted text-uppercase mb-2" style="font-size:10px;">System Status</div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-info" style="width:8px;height:8px;"></div>
+                    <span class="text-info fw-bold" style="font-size:12px;">Operational</span>
+                </div>
             </div>
+
+            <a href="{{ url_for('logout') }}"
+               class="sidebar-link text-danger"
+               style="border-left-color:transparent;">
+                <span class="material-symbols-outlined">logout</span>
+                <span>Sair</span>
+            </a>
+
         </div>
+
     </div>
 </aside>
-<!-- Main content -->
-<main class="main_base main-content ">
-    <div class="container-fluid p-1 p-md-3" style="max-width: 1600px;">
+
+<!-- Main Content -->
+<main class="main_base main-content">
+    <div class="container-fluid p-3" style="max-width:1600px;">
         {% block conteudo %}
-
-
         {% endblock conteudo %}
     </div>
 </main>
-<!-- Bootstrap 5 JS Bundle -->
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="bottom-nav">
+    <a href="{{ url_for('rastreio') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
+        <span class="material-symbols-outlined" style="font-size:22px;">dashboard</span>
+        Dashboard
+    </a>
+    <a href="{{ url_for('busca_pacote') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
+        <span class="material-symbols-outlined" style="font-size:22px;">search</span>
+        Rastreio
+    </a>
+    <a href="{{ url_for('galpao') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
+        <span class="material-symbols-outlined" style="font-size:22px;">warehouse</span>
+        Galpões
+    </a>
+    <a href="{{ url_for('cliente') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
+        <span class="material-symbols-outlined" style="font-size:22px;">groups</span>
+        Clientes
+    </a>
+</nav>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 </body>
 </html>

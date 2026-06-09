@@ -4,120 +4,211 @@
 
 <div class="container-fluid">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
             <h2 class="fw-bold underline_azul mb-1">Gestão de Clientes</h2>
             <small class="text-muted">Base de parceiros e clientes logísticos</small>
         </div>
-
-        <button
-                class="flex-1 md:flex-none btn-primary-custom flex items-center justify-center gap-2"
+        <button class="btn-primary-custom"
                 data-bs-toggle="modal"
                 data-bs-target="#modalNovoCliente">
-            <span class="material-symbols-outlined text-lg">add</span>
+            <span class="material-symbols-outlined align-middle me-1">add</span>
             Novo Cliente
         </button>
     </div>
 
+    <!-- Cards -->
     <div class="row g-4 mb-4">
 
-        <div class="col-md-4">
-            <div class="card-custom">
-                <small class="text-muted text-uppercase fw-bold">Clientes Ativos</small>
-                <h2 class="fw-bold mt-2">1.284</h2>
-                <span class="text-info small">+12% este mês</span>
+        <div class="col-lg-4 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">Clientes Ativos</small>
+                        <h2 class="fw-bold mt-2 mb-0">1.284</h2>
+                        <small class="text-info">+12% este mês</small>
+                    </div>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">groups</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card-custom">
-                <small class="text-muted text-uppercase fw-bold">Novos Clientes</small>
-                <h2 class="fw-bold mt-2">42</h2>
-                <span class="text-info small">Cadastros recentes</span>
+        <div class="col-lg-4 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">Novos Clientes</small>
+                        <h2 class="fw-bold mt-2 mb-0">42</h2>
+                        <small class="text-info">Cadastros recentes</small>
+                    </div>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-info">person_add</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card-custom">
-                <small class="text-muted text-uppercase fw-bold">Pagamentos Pendentes</small>
-                <h2 class="fw-bold mt-2 text-warning">R$ 14.200</h2>
-                <span class="text-warning small">8 contas abertas</span>
+        <div class="col-lg-4 col-md-6">
+            <div class="card-custom h-100">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <small class="text-muted text-uppercase fw-bold">Pagamentos Pendentes</small>
+                        <h2 class="fw-bold mt-2 mb-0 text-warning">R$ 14.200</h2>
+                        <small class="text-warning">8 contas abertas</small>
+                    </div>
+                    <div class="stat-icon-wrapper">
+                        <span class="material-symbols-outlined text-warning">payments</span>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
+    <!-- Tabela -->
     <div class="table-container">
 
         <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
-             style="border-color: var(--border-color)!important;">
-
-            <h5 class="mb-0 underline_azul fw-bold">
-                Base de Clientes
-            </h5>
-
-            <input class="form-control w-auto"
-                   placeholder="Buscar cliente...">
-
+             style="border-color:var(--border-color)!important;">
+            <div>
+                <h5 class="fw-bold underline_azul mb-0">Base de Clientes</h5>
+                <small class="text-muted">Gerencie seus parceiros logísticos</small>
+            </div>
+            <div class="d-flex gap-2">
+                <input class="form-control"
+                       placeholder="Buscar cliente..."
+                       style="width:250px;background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                <button class="btn-primary-custom">Buscar</button>
+            </div>
         </div>
 
         <div class="table-responsive">
-
-            <table class="table mb-0">
-
+            <table class="table mb-0 align-middle">
                 <thead>
-                <tr>
-                    <th>CLIENTE</th>
-                    <th>CNPJ</th>
-                    <th>TIER</th>
-                    <th>STATUS</th>
-                    <th>VOLUME MENSAL</th>
-                    <th class="text-end">AÇÕES</th>
-                </tr>
+                    <tr>
+                        <th>CLIENTE</th>
+                        <th>CNPJ</th>
+                        <th>PLANO</th>
+                        <th>STATUS</th>
+                        <th>VOLUME</th>
+                        <th class="text-end">AÇÕES</th>
+                    </tr>
                 </thead>
-
                 <tbody>
 
-                <tr>
-                    <td><strong>TechCargo Solutions</strong></td>
-                    <td>12.345.678/0001-90</td>
-                    <td><span class="status-pill text-warning">Gold</span></td>
-                    <td><span class="status-pill text-info">Ativo</span></td>
-                    <td>R$ 145.200</td>
-                    <td class="text-end">⋮</td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                     style="width:42px;height:42px;background:#033C3E;border:1px solid #1A6B6E;color:#06C7CE;flex-shrink:0;">
+                                    TC
+                                </div>
+                                <div>
+                                    <div class="fw-bold">TechCargo Solutions</div>
+                                    <small class="text-muted">São Paulo - SP</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>12.345.678/0001-90</td>
+                        <td><span class="status-pill text-warning">GOLD</span></td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#06C7CE;display:inline-block;"></span>
+                                Ativo
+                            </div>
+                        </td>
+                        <td class="fw-bold">R$ 145.200</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">Editar</button>
+                        </td>
+                    </tr>
 
-                <tr class="row-alt">
-                    <td><strong>RapidLog Express</strong></td>
-                    <td>98.765.432/0001-21</td>
-                    <td><span class="status-pill text-secondary">Silver</span></td>
-                    <td><span class="status-pill text-info">Ativo</span></td>
-                    <td>R$ 82.100</td>
-                    <td class="text-end">⋮</td>
-                </tr>
+                    <tr class="row-alt">
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                     style="width:42px;height:42px;background:#033C3E;border:1px solid #1A6B6E;color:#06C7CE;flex-shrink:0;">
+                                    RL
+                                </div>
+                                <div>
+                                    <div class="fw-bold">RapidLog Express</div>
+                                    <small class="text-muted">Curitiba - PR</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>98.765.432/0001-21</td>
+                        <td><span class="status-pill text-secondary">SILVER</span></td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#06C7CE;display:inline-block;"></span>
+                                Ativo
+                            </div>
+                        </td>
+                        <td class="fw-bold">R$ 82.100</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">Editar</button>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td><strong>Nordeste Shipping</strong></td>
-                    <td>45.001.223/0001-44</td>
-                    <td><span class="status-pill text-warning">Bronze</span></td>
-                    <td><span class="status-pill text-danger">Inativo</span></td>
-                    <td>R$ 12.400</td>
-                    <td class="text-end">⋮</td>
-                </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                     style="width:42px;height:42px;background:#033C3E;border:1px solid #1A6B6E;color:#06C7CE;flex-shrink:0;">
+                                    NS
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Nordeste Shipping</div>
+                                    <small class="text-muted">Recife - PE</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>45.001.223/0001-44</td>
+                        <td><span class="status-pill text-warning">BRONZE</span></td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#dc3545;display:inline-block;"></span>
+                                Inativo
+                            </div>
+                        </td>
+                        <td class="fw-bold">R$ 12.400</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">Editar</button>
+                        </td>
+                    </tr>
 
-                <tr class="row-alt">
-                    <td><strong>Global Linkages</strong></td>
-                    <td>22.111.333/0001-55</td>
-                    <td><span class="status-pill text-warning">Gold</span></td>
-                    <td><span class="status-pill text-info">Ativo</span></td>
-                    <td>R$ 310.000</td>
-                    <td class="text-end">⋮</td>
-                </tr>
+                    <tr class="row-alt">
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                     style="width:42px;height:42px;background:#033C3E;border:1px solid #1A6B6E;color:#06C7CE;flex-shrink:0;">
+                                    GL
+                                </div>
+                                <div>
+                                    <div class="fw-bold">Global Linkages</div>
+                                    <small class="text-muted">Brasília - DF</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>22.111.333/0001-55</td>
+                        <td><span class="status-pill text-warning">GOLD</span></td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#06C7CE;display:inline-block;"></span>
+                                Ativo
+                            </div>
+                        </td>
+                        <td class="fw-bold">R$ 310.000</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-info">Editar</button>
+                        </td>
+                    </tr>
 
                 </tbody>
-
             </table>
-
         </div>
 
     </div>
@@ -125,207 +216,82 @@
 </div>
 
 <!-- Modal Novo Cliente -->
-<div class="modal fade" id="modalNovoCliente" tabindex="-1" aria-labelledby="modalNovoClienteLabel"
-     aria-hidden="true">
-
+<div class="modal fade" id="modalNovoCliente" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content"
-             style="background-color:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+             style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
 
             <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
-                <h5 class="modal-title fw-bold" id="modalNovoClienteLabel">
-                    Cadastrar Novo Cliente
-                </h5>
-
-                <button type="button"
-                        class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"></button>
+                <h5 class="modal-title fw-bold">Cadastrar Novo Cliente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <form method="POST" action="/clientes/cadastrar">
-
                 <div class="modal-body">
-
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Razão Social
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="razao_social"
-                                   required
+                            <label class="form-label fw-bold">Razão Social</label>
+                            <input type="text" name="razao_social" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Nome Fantasia
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="nome_fantasia"
+                            <label class="form-label fw-bold">Nome Fantasia</label>
+                            <input type="text" name="nome_fantasia" class="form-control"
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                CNPJ
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="cnpj"
-                                   required
+                            <label class="form-label fw-bold">CNPJ</label>
+                            <input type="text" name="cnpj" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Inscrição Estadual
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="ie"
+                            <label class="form-label fw-bold">E-mail</label>
+                            <input type="email" name="email" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                E-mail
-                            </label>
-
-                            <input type="email"
-                                   class="form-control"
-                                   name="email"
-                                   required
+                            <label class="form-label fw-bold">Telefone</label>
+                            <input type="text" name="telefone" class="form-control"
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Telefone
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="telefone"
+                            <label class="form-label fw-bold">Cidade / Estado</label>
+                            <input type="text" name="cidade" class="form-control"
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Cidade
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="cidade"
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label fw-bold">
-                                Estado
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="estado"
-                                   maxlength="2"
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label fw-bold">
-                                CEP
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="cep"
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label fw-bold">
-                                Endereço
-                            </label>
-
-                            <input type="text"
-                                   class="form-control"
-                                   name="endereco"
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Plano
-                            </label>
-
-                            <select class="form-select"
-                                    name="plano"
+                            <label class="form-label fw-bold">Plano</label>
+                            <select name="plano" class="form-select"
                                     style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-
-                                <option value="Bronze">
-                                    Bronze
-                                </option>
-
-                                <option value="Silver">
-                                    Silver
-                                </option>
-
-                                <option value="Gold">
-                                    Gold
-                                </option>
-
+                                <option value="Bronze">Bronze</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Gold">Gold</option>
                             </select>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-bold">
-                                Status
-                            </label>
-
-                            <select class="form-select"
-                                    name="status"
+                            <label class="form-label fw-bold">Status</label>
+                            <select name="status" class="form-select"
                                     style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-
-                                <option value="Ativo">
-                                    Ativo
-                                </option>
-
-                                <option value="Inativo">
-                                    Inativo
-                                </option>
-
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
                             </select>
                         </div>
 
                     </div>
-
                 </div>
 
-                <div class="modal-footer border-top"
-                     style="border-color:#1A6B6E !important;">
-
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-
-                    <button type="submit"
-                            class="btn btn-primary-custom">
-                        Salvar Cliente
-                    </button>
-
+                <div class="modal-footer" style="border-color:#1A6B6E;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-primary-custom">Salvar Cliente</button>
                 </div>
-
             </form>
 
         </div>

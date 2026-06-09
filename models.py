@@ -4,7 +4,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 #base de dados
 
-engine = create_engine('mysql+pymysql://root:senaisp@localhost:3306/flashlog')
+engine = create_engine(
+    "sqlite:///flashlog.db",
+    echo=True
+)
 
 
 db_session = scoped_session(sessionmaker(bind=engine))
