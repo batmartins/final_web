@@ -108,7 +108,11 @@ def login():
 
 @app.route('/cliente')
 def cliente():
-    return render_template('clientes.html')
+    return (render_template('clientes.html'))
+
+@app.route('/encomendas')
+def encomendas():
+    return render_template('encomendas.html')
 
 
 if __name__ == '__main__':
