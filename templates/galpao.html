@@ -15,7 +15,7 @@
             </small>
         </div>
 
-        <button class="btn btn-primary-custom">
+        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalNovoGalpao">
             <span class="material-symbols-outlined align-middle me-1">
                 add
             </span>
@@ -41,9 +41,6 @@
                 Controle Operacional
             </h5>
 
-            <button class="btn btn-primary-custom">
-                Adicionar Unidade
-            </button>
 
         </div>
 
@@ -76,7 +73,9 @@
                             <small>94%</small>
                         </div>
                     </td>
+                </tr>
 
+                </tbody>
 
             </table>
 
@@ -85,5 +84,39 @@
     </div>
 
 </div>
+
+<!-- Modal Novo Galpão -->
+<div class="modal fade" id="modalNovoGalpao" tabindex="-1" aria-labelledby="modalNovoGalpaoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalNovoGalpaoLabel">Novo Galpão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo do seu modal aqui -->
+                <form id="formNovoGalpao">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Galpão</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex: WH-SAO-001" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="localizacao" class="form-label">Localização</label>
+                        <input type="text" class="form-control" id="localizacao" name="localizacao" placeholder="Ex: São Paulo - SP" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="capacidade" class="form-label">Capacidade (%)</label>
+                        <input type="number" class="form-control" id="capacidade" name="capacidade" min="0" max="100" placeholder="Ex: 94" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" form="formNovoGalpao" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

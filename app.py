@@ -114,6 +114,20 @@ def cliente():
 def encomendas():
     return render_template('encomendas.html')
 
+@app.route('/detalhes_movimentacao')
+def detalhes_movimentacao():
+    return render_template('detalhes_moviment.html')
+
+
+
+
+
+
+
+@app.route('/detalhes_encomenda')
+def detalhes_encomenda():
+    return render_template('detalhes_encomenda.html')
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5004)
+    app.run(debug=True, port=5004 )

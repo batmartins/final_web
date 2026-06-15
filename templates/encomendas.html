@@ -21,39 +21,29 @@
 
     <!-- Estatísticas -->
     <div class="row g-4 mb-4">
-
-
     </div>
 
     <!-- Busca -->
     <div class="card-custom mb-4">
-
         <div class="row g-3 align-items-center">
-
             <div class="col-lg-8">
                 <input type="text"
                        class="form-control"
                        placeholder="Buscar código de rastreio, cliente ou destino..."
                        style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
             </div>
-
-
             <div class="col-lg-2">
                 <button class="btn-primary-custom w-100">
                     Buscar
                 </button>
             </div>
-
         </div>
-
     </div>
 
     <!-- Tabela -->
     <div class="table-container">
-
         <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
              style="border-color: var(--border-color)!important;">
-
             <div>
                 <h5 class="fw-bold underline_azul mb-0">
                     Lista de Encomendas
@@ -62,104 +52,162 @@
                     Últimas movimentações registradas
                 </small>
             </div>
-
-            <button class="btn btn-sm btn-outline-info">
-                <span class="material-symbols-outlined align-middle">
-                    download
-                </span>
-                Exportar
-            </button>
-
         </div>
 
         <div class="table-responsive">
-
             <table class="tabela table align-middle mb-0">
-
                 <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Codigo De Rastreio</th>
-                    <th>Fragilidade</th>
-                    <th>Tipo</th>
-                    <th>Remetente</th>
-                    <th></th>
-                    <
-
-                </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Código De Rastreio</th>
+                        <th>Fragilidade</th>
+                        <th>Tipo</th>
+                        <th>Remetente</th>
+                        <th class="text-end">Ações</th>
+                    </tr>
                 </thead>
-                <div class="encomendado table align-middle mb-0">
-
+                <tbody>
                     <tr class="row-alt">
-
                         <td><strong>Carlos De Almeida</strong></td>
                         <td class="tracking-id">FLX990307</td>
-                        <td>Fragil</td>
-                        <td>Eletronico</td>
+                        <td>Frágil</td>
+                        <td>Eletrônico</td>
                         <td>Mercado Livre</td>
-
-
                         <td class="text-end">
-                            <button class="btn btn-sm btn-outline-info">
+                            <!-- Botão Movimentação -->
+                            <button class="btn btn-sm btn-outline-warning me-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalmovimentacao">
+                                Movimentação
+                            </button>
+                            <!-- Botão Ver -->
+                            <button class="btn btn-sm btn-outline-info"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalVerEncomenda">
                                 Ver
                             </button>
                         </td>
                     </tr>
-
-                    </tbody>
-                </div>
+                </tbody>
             </table>
-
         </div>
-
     </div>
-
 </div>
 
-<!-- Modal Nova Encomenda -->
-<div class="modal fade"
-     id="modalNovaEncomenda"
-     tabindex="-1">
+<!-- ==================== MODAIS ==================== -->
 
+<!-- 1. Modal Registrar Movimentação -->
+<div class="modal fade" id="modalmovimentacao" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+
+            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
+                <h5 class="modal-title fw-bold underline_azul">Registrar Movimentação</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <form method="POST" action="/movimentacoes/registrar">
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Localização atual</label>
+                        <input type="text"
+                               name="localizacao"
+                               class="form-control"
+                               placeholder="ex: Campinas - SP"
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descrição</label>
+                        <input type="text"
+                               name="descricao"
+                               class="form-control"
+                               placeholder="ex: Chegou ao centro de distribuição"
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Atualizar status</label>
+                        <select class="form-select"
+                                name="status"
+                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                            <option value="">Manter atual</option>
+                            <option value="Em Trânsito">Em Trânsito</option>
+                            <option value="Entregue">Entregue</option>
+                            <option value="Atrasada">Atrasada</option>
+                            <option value="Exceção">Exceção</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer" style="border-color:#1A6B6E;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-primary-custom">
+                        <span class="material-symbols-outlined align-middle me-1" style="font-size:16px;">add_location</span>
+                        Registrar
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- 2. Modal Detalhes (Ver) -->
+<div class="modal fade" id="modalVerEncomenda" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+
+            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
+                <h5 class="modal-title fw-bold underline_azul">Detalhes da Encomenda</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <p class="mb-2"><strong>Cliente:</strong> Carlos De Almeida</p>
+                    <p class="mb-2"><strong>Código de Rastreio:</strong> <span class="badge bg-secondary">FLX990307</span></p>
+                    <p class="mb-2"><strong>Fragilidade:</strong> Frágil</p>
+                    <p class="mb-2"><strong>Tipo:</strong> Eletrônico</p>
+                    <p class="mb-2"><strong>Remetente:</strong> Mercado Livre</p>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="border-color:#1A6B6E;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 3. Modal Nova Encomenda -->
+<div class="modal fade" id="modalNovaEncomenda" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
 
-        <div class="modal-content"
-             style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
-
-            <div class="modal-header border-bottom"
-                 style="border-color:#1A6B6E !important;">
-
-                <h5 class="modal-title fw-bold">
-                    Nova Encomenda
-                </h5>
-
-                <button class="btn-close btn-close-white"
-                        data-bs-dismiss="modal">
-                </button>
-
+            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
+                <h5 class="modal-title fw-bold">Nova Encomenda</h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <form method="POST" action="/encomendas/cadastrar">
-
                 <div class="modal-body">
-
                     <div class="row g-3">
-
                         <div class="col-md-6">
                             <label class="form-label">Nome</label>
                             <input type="text" name="cliente" class="form-control">
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">Código de Rastreio</label>
                             <input type="text" name="codigo" class="form-control">
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">Fragilidade</label>
                             <input type="text" name="origem" class="form-control">
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">Tipo</label>
                             <input type="text" name="destino" class="form-control">
@@ -168,34 +216,14 @@
                             <label class="form-label">Remetente</label>
                             <input type="text" name="destino" class="form-control">
                         </div>
-
-
                     </div>
-
                 </div>
 
-                <div class="modal-footer"
-                     style="border-color:#1A6B6E;">
-
-                    <button type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-
-                    <button type="submit"
-                            class="btn-primary-custom">
-                        Salvar Encomenda
-                    </button>
-
+                <div class="modal-footer" style="border-color:#1A6B6E;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
-
             </form>
-
         </div>
-
     </div>
-
 </div>
-
-{% endblock %}
+{%endblock%}
