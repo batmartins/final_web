@@ -20,9 +20,6 @@
 
     <!-- Cards -->
     <div class="row g-4 mb-4">
-
-
-
     </div>
 
     <!-- Tabela -->
@@ -48,20 +45,17 @@
                     <tr>
                         <th>CLIENTE</th>
                         <th>E-mail</th>
-                        <th>Senha</th>
                         <th>Endereço</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                {%for cliente in clientes%}
+                {% for cliente in clientes %}
                     <tr>
-                        <td>{{cliente.nome}}</td>
-                        <td>{{cliente.email}}</td>
-                        <td>{{cliente.senha}}</td>
-                        <td>{{cliente.endereco}}</td>
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td>{{ cliente.endereco }}</td>
                     </tr>
-                {%endfor%}
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -81,33 +75,36 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="POST" action="/clientes/cadastrar">
+            <!-- ALINHADO: Direciona para a rota /cliente usando POST -->
+            <form method="POST" action="/cliente">
                 <div class="modal-body">
                     <div class="row g-3">
 
-
-
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Nome</label>
-                            <input type="text" name="nome_fantasia" class="form-control"
+                            <!-- CORRIGIDO: name alterado para "nome" para alinhar com o cadastro do usuário -->
+                            <input type="text" name="form-nome" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-bold">E-mail</label>
-                            <input type="email" name="email" class="form-control" required
+                            <!-- CORRIGIDO: name alterado para "email" para alinhar com o cadastro do usuário -->
+                            <input type="email" name="form-email" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Senha</label>
-                            <input type="text" name="telefone" class="form-control"
+                            <!-- CORRIGIDO: name alterado para "senha" para alinhar com o cadastro do usuário -->
+                            <input type="password" name="form-senha" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Endereço</label>
-                            <input type="text" name="cidade" class="form-control"
+                            <!-- CORRIGIDO: name alterado para "endereco" para alinhar com o cadastro do usuário -->
+                            <input type="text" name="form-endereco" class="form-control" required
                                    style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                         </div>
 

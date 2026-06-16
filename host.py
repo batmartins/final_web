@@ -19,7 +19,7 @@ def post_clientes(nome, email, senha, endereco):
 
 
 def get_clientes():
-    url = f"{codigo_host}/buscar_clientes"
+    url = f"{codigo_host}/buscar_cliente/1"
 
     response = requests.get(url)
 
@@ -106,6 +106,49 @@ def post_movimentacao(situacao, codigo_rastreio, galpao_id):
 def get_galpao():
     url = f"{codigo_host}/buscar_galpao/1"
 
+    response = requests.post(url)
+
+    return response.json()
+def get_movimentacoes():
+    url = f"{codigo_host}/listar_movimentacoes"
+
+    response = requests.get(url)
+
+    return response.json()
+
+def post_veiculo(id, modelo):
+    url = f"{codigo_host}/cadastro_veiculos"
+
+    dados = {
+        "id": id,
+        "modelo": modelo,
+    }
+
+    response = requests.post(url, json=dados)
+
+    return response.json()
+def put_veiculo(id, modelo):
+    url = f"{codigo_host}/editar_veiculo"
+
+    dados = {
+        "id": id,
+        "modelo": modelo,
+    }
+
+    response = requests.post(url, json=dados)
+
+    return response.json()
+
+
+def get_veiculos():
+    url = f"{codigo_host}/listar_veiculos"
+
+    response = requests.get(url)
+
+    return response.json()
+def get_veiculos():
+    url = f"{codigo_host}/buscar_veiculo"
+
     response = requests.get(url)
 
     return response.json()
@@ -118,7 +161,7 @@ def get_galpoes():
     return response.json()
 
 def get_movimentacao():
-    url = f"{codigo_host}/buscar_movimentacao"
+    url = f"{codigo_host}/buscar_movimentacao/1"
 
     response = requests.get(url)
 
@@ -215,3 +258,8 @@ def put_galpao(id_, nome_, locaizacao_, capacidade_):
     return response.json()
 
 
+def get_clientes():
+    url = f"{codigo_host}/listar_clientes"
+    response = requests.get(url)
+
+    return response.json()

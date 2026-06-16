@@ -20,13 +20,9 @@
 
     <!-- Cards -->
     <div class="row g-4 mb-4">
-
-
-
-
     </div>
 
-    <!-- Busca -->
+    <!-- Busca (Alterada para simular link estático sem JavaScript) -->
     <div class="card-custom mb-4">
         <div class="row g-3 align-items-center">
             <div class="col-lg-10">
@@ -38,154 +34,14 @@
                     <input type="text"
                            id="campoBusca"
                            class="form-control"
-                           placeholder="Digite o código de rastreio ex: FLX-990304..."
+                           placeholder="Clique em buscar para ver a tela de movimentação..."
                            style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                 </div>
             </div>
             <div class="col-lg-2">
-                <button class="btn-primary-custom w-100" onclick="buscarEncomenda()">Buscar</button>
+                <!-- Este link estático direciona para a nova página de detalhes -->
+                <a href="detalhes.html" class="btn-primary-custom w-100 text-center text-decoration-none d-block" style="line-height: 2.4rem;">Buscar</a>
             </div>
-        </div>
-    </div>
-
-    <!-- Resultado da busca (oculto por padrão) -->
-    <div id="resultadoBusca" style="display:none;" class="mb-4">
-        <div class="row g-4">
-
-            <!-- Detalhes -->
-            <div class="col-lg-8">
-                <div class="card-custom">
-
-                    <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap gap-2">
-                        <div>
-                            <small class="text-muted text-uppercase fw-bold">Código de Rastreio</small>
-                            <h2 class="tracking-id fw-bold mt-1 mb-2" style="font-size:2rem;" id="codigoResultado">
-                                #FLX-990304
-                            </h2>
-                            <span class="status-pill text-info">Em Trânsito</span>
-                        </div>
-                        <small class="text-muted">Última atualização: 09/06/2026 14:32</small>
-                    </div>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <div class="p-3 rounded" style="background:#033C3E;border:1px solid #1A6B6E;">
-                                <small class="text-muted d-block mb-1">Origem</small>
-                                <strong>São Paulo - SP</strong>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 rounded" style="background:#033C3E;border:1px solid #1A6B6E;">
-                                <small class="text-muted d-block mb-1">Destino</small>
-                                <strong>Curitiba - PR</strong>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 rounded" style="background:#033C3E;border:1px solid #1A6B6E;">
-                                <small class="text-muted d-block mb-1">Tipo</small>
-                                <strong>Carga Geral</strong>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 rounded" style="background:#033C3E;border:1px solid #1A6B6E;">
-                                <small class="text-muted d-block mb-1">Fragilidade</small>
-                                <strong>Média</strong>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="p-3 rounded" style="background:#033C3E;border:1px solid #1A6B6E;">
-                                <small class="text-muted d-block mb-1">Cadastrada em</small>
-                                <strong>05/06/2026</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Timeline de movimentação -->
-                    <h6 class="underline_azul fw-bold mb-3">Movimentação</h6>
-
-                    <div class="d-flex gap-3 mb-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="rounded-circle"
-                                 style="width:12px;height:12px;background:#06C7CE;flex-shrink:0;margin-top:4px;box-shadow:0 0 8px #06C7CE;"></div>
-                            <div style="width:1px;flex:1;background:#1A6B6E;min-height:28px;margin:4px 0;"></div>
-                        </div>
-                        <div class="pb-2">
-                            <div class="fw-bold">Em trânsito pela Rod. Fernão Dias, KM 842</div>
-                            <small class="text-muted">Pouso Alegre - MG · 09/06/2026 14:32</small>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="rounded-circle"
-                                 style="width:12px;height:12px;background:#1A6B6E;flex-shrink:0;margin-top:4px;"></div>
-                            <div style="width:1px;flex:1;background:#1A6B6E;min-height:28px;margin:4px 0;"></div>
-                        </div>
-                        <div class="pb-2">
-                            <div class="fw-bold">Saiu do centro de distribuição</div>
-                            <small class="text-muted">Cajamar - SP · 09/06/2026 08:10</small>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="rounded-circle"
-                                 style="width:12px;height:12px;background:#1A6B6E;flex-shrink:0;margin-top:4px;"></div>
-                            <div style="width:1px;flex:1;background:#1A6B6E;min-height:28px;margin:4px 0;"></div>
-                        </div>
-                        <div class="pb-2">
-                            <div class="fw-bold">Medido e pesado no hub</div>
-                            <small class="text-muted">Loggi Hub - Cajamar · 08/06/2026 22:15</small>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="rounded-circle"
-                                 style="width:12px;height:12px;background:#1A6B6E;flex-shrink:0;margin-top:4px;"></div>
-                            <div style="width:1px;flex:1;background:#1A6B6E;min-height:28px;margin:4px 0;"></div>
-                        </div>
-                        <div class="pb-2">
-                            <div class="fw-bold">Conferido na base operacional</div>
-                            <small class="text-muted">Extrema - MG · 08/06/2026 18:00</small>
-                        </div>
-                    </div>
-
-                    <div class="d-flex gap-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <div class="rounded-circle"
-                                 style="width:12px;height:12px;background:#1A6B6E;flex-shrink:0;margin-top:4px;"></div>
-                        </div>
-                        <div class="pb-2">
-                            <div class="fw-bold">Coletado na origem</div>
-                            <small class="text-muted">São Paulo - SP · 08/06/2026 14:20</small>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Painel lateral do resultado -->
-
-
-                <div class="card-custom">
-                    <h6 class="underline_azul fw-bold mb-3">Sistema</h6>
-                    <div class="d-flex align-items-center gap-2 mb-1">
-                        <div class="rounded-circle bg-info" style="width:8px;height:8px;box-shadow:0 0 6px #06C7CE;"></div>
-                        <span class="fw-bold text-info">Operacional</span>
-                    </div>
-                    <small class="text-muted">Todos os serviços funcionando normalmente.</small>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Erro de busca -->
-    <div id="erroBusca" style="display:none;" class="mb-4">
-        <div class="p-4 rounded" style="background:#2a1f00;border:1px solid #ffc107;color:#ffc107;">
-            <span class="material-symbols-outlined align-middle me-2">warning</span>
-            Nenhuma encomenda encontrada com esse código.
         </div>
     </div>
 
@@ -212,14 +68,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                {%for encomenda in encomendas %}
+                {% for encomenda in encomendas %}
                 <tr>
-                    <td>{{encomenda.codigo_rastreio}}</td>
+                    <!-- Link estático adicionado ao código de rastreio -->
+                    <td><a href="detalhes.html" class="text-info fw-bold">{{encomenda.codigo_rastreio}}</a></td>
                     <td>{{encomenda.nome}}</td>
                     <td>{{encomenda.tipo}}</td>
                     <td>{{encomenda.remetente}}</td>
                 </tr>
-                {%endfor%}
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -260,7 +117,6 @@
                         </select>
                     </div>
 
-
                     <div class="col-md-6">
                         <label class="form-label fw-bold">Fragilidade</label>
                         <select class="form-select"
@@ -282,35 +138,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Códigos simulados para demonstração visual
-    const encomendas = ['FLX-990304', 'FLX-990305', 'FLX-990306', 'FLX-990307'];
-
-    function buscarEncomenda() {
-        const codigo = document.getElementById('campoBusca').value.trim().toUpperCase();
-        const resultado = document.getElementById('resultadoBusca');
-        const erro = document.getElementById('erroBusca');
-
-        resultado.style.display = 'none';
-        erro.style.display = 'none';
-
-        if (!codigo) return;
-
-        if (encomendas.includes(codigo)) {
-            document.getElementById('codigoResultado').textContent = '#' + codigo;
-            resultado.style.display = 'block';
-            resultado.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            erro.style.display = 'block';
-            erro.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    // Buscar também ao pressionar Enter
-    document.getElementById('campoBusca').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') buscarEncomenda();
-    });
-</script>
 
 {% endblock %}

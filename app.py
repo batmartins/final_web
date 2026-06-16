@@ -2,7 +2,8 @@ from flask import Flask, render_template, url_for, flash, request, redirect
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.testing.pickleable import User
 
-from host import get_encomendas, get_usuarios, get_entregadores, post_movimentacao, get_galpao, get_galpoes
+from host import get_encomendas, get_usuarios, get_entregadores, post_movimentacao, get_galpao, get_galpoes, \
+    get_movimentacoes
 from models import db_session, Usuario
 from sqlalchemy import select, and_, func
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -89,21 +90,27 @@ def cadastro_usuario():
             flash(f'erro ao cadastrar usuario', 'danger')
             print(f'Erro ao cadastrar: {e}')
             return redirect(url_for('cadastro_usuario'))
-    return render_template('rastreio.html')
+    # return render_template('rastreio.html')
+    return redirect(url_for(rastreio))
 
 
 @app.route('/rastreio')
 def rastreio():
-    entregador = get_entregadores()
     encomenda = get_encomendas()
-    movimentacao = post_movimentacao()
-    return render_template('rastreio.html',entregadores=entregador,movimentacoes=movimentacao, encomendas=encomenda)
+    movimentacao = get_movimentacoes()
+    return render_template('rastreio.html',encomendas=encomenda,movimentacoes=movimentacao)
 
 @app.route('/busca_pacote')
 def busca_pacote():
     encomenda = get_encomendas()
     print(f"AQUIIII{encomenda}")
     return render_template('busca_pacote.html', encomendas=encomenda)
+
+@app.route('/listar_galpoes')
+def listar_galpoes():
+    galpoes = get_galpoes()
+    return render_template('rastreio.html',galpoes=galpoes)
+
 @app.route('/galpao')
 def galpao():
     repositorio = get_galpoes()
