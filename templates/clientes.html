@@ -54,8 +54,14 @@
                     </tr>
                 </thead>
                 <tbody>
-
-
+                {%for cliente in clientes%}
+                    <tr>
+                        <td>{{cliente.nome}}</td>
+                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.senha}}</td>
+                        <td>{{cliente.endereco}}</td>
+                    </tr>
+                {%endfor%}
                 </tbody>
             </table>
         </div>

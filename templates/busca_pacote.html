@@ -208,10 +208,18 @@
                         <th>RASTREIO</th>
                         <th>Nome</th>
                         <th>Tipo</th>
-                        <th>STATUS</th>
+                        <th>Remetente</th>
                     </tr>
                 </thead>
                 <tbody>
+                {%for encomenda in encomendas %}
+                <tr>
+                    <td>{{encomenda.codigo_rastreio}}</td>
+                    <td>{{encomenda.nome}}</td>
+                    <td>{{encomenda.tipo}}</td>
+                    <td>{{encomenda.remetente}}</td>
+                </tr>
+                {%endfor%}
                 </tbody>
             </table>
         </div>

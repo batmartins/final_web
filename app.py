@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, flash, request, redirect
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.testing.pickleable import User
 
+from host import get_encomendas, get_usuarios, get_entregadores, post_movimentacao, get_galpao, get_galpoes
 from models import db_session, Usuario
 from sqlalchemy import select, and_, func
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -93,14 +94,21 @@ def cadastro_usuario():
 
 @app.route('/rastreio')
 def rastreio():
-    return render_template('rastreio.html')
+    entregador = get_entregadores()
+    encomenda = get_encomendas()
+    movimentacao = post_movimentacao()
+    return render_template('rastreio.html',entregadores=entregador,movimentacoes=movimentacao, encomendas=encomenda)
 
 @app.route('/busca_pacote')
 def busca_pacote():
-    return (render_template('busca_pacote.html'))
+    encomenda = get_encomendas()
+    print(f"AQUIIII{encomenda}")
+    return render_template('busca_pacote.html', encomendas=encomenda)
 @app.route('/galpao')
 def galpao():
-    return render_template('galpao.html')
+    repositorio = get_galpoes()
+    print(repositorio)
+    return render_template('galpao.html', repositorios=repositorio)
 
 @app.route('/login')
 def login():
@@ -108,11 +116,12 @@ def login():
 
 @app.route('/cliente')
 def cliente():
-    return (render_template('clientes.html'))
+    return render_template('clientes.html')
 
 @app.route('/encomendas')
 def encomendas():
-    return render_template('encomendas.html')
+    encomenda = get_encomendas()
+    return render_template('encomendas.html', encomendas=encomenda)
 
 @app.route('/detalhes_movimentacao')
 def detalhes_movimentacao():
@@ -124,9 +133,6 @@ def detalhes_movimentacao():
 
 
 
-@app.route('/detalhes_encomenda')
-def detalhes_encomenda():
-    return render_template('detalhes_encomenda.html')
 
 
 if __name__ == '__main__':

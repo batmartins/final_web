@@ -57,25 +57,15 @@
                 </thead>
 
                 <tbody>
-
+                {%for repositorio in repositorios %}
                 <tr>
-                    <td class="tracking-id">WH-SAO-001</td>
-                    <td>São Paulo - SP</td>
-
-                    <td style="width:220px">
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="progress flex-grow-1"
-                                 style="height:6px;background:#033C3E;">
-                                <div class="progress-bar bg-info"
-                                     style="width:94%">
-                                </div>
-                            </div>
-                            <small>94%</small>
-                        </div>
-                    </td>
+                    <td class="tracking-id">{{repositorio.nome}}</td>
+                    <td>{{repositorio.localizacao}}</td>
+                    <td>{{repositorio.capacidade}}</td>
                 </tr>
-
+                {%endfor%}
                 </tbody>
+
 
             </table>
 

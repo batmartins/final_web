@@ -63,17 +63,22 @@
                         <th>Fragilidade</th>
                         <th>Tipo</th>
                         <th>Remetente</th>
-                        <th class="text-end">Ações</th>
+                        <th class="text-center">Ações</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="row-alt">
-                        <td><strong>Carlos De Almeida</strong></td>
-                        <td class="tracking-id">FLX990307</td>
-                        <td>Frágil</td>
-                        <td>Eletrônico</td>
-                        <td>Mercado Livre</td>
-                        <td class="text-end">
+                    {%for encomenda in encomendas %}
+                <tr>
+                    <td>{{encomenda.nome}}</td>
+                    <td>{{encomenda.codigo_rastreio}}</td>
+                    <td>{{encomenda.fragilidade}}</td>
+                    <td>{{encomenda.tipo}}</td>
+                    <td>{{encomenda.remetente}}</td>
+
+
+
+                        <td>
                             <!-- Botão Movimentação -->
                             <button class="btn btn-sm btn-outline-warning me-2"
                                     data-bs-toggle="modal"
@@ -87,7 +92,9 @@
                                 Ver
                             </button>
                         </td>
+
                     </tr>
+                {%endfor%}
                 </tbody>
             </table>
         </div>
@@ -166,13 +173,15 @@
             </div>
 
             <div class="modal-body">
+                {%for encomenda in encomendas %}
                 <div class="mb-3">
-                    <p class="mb-2"><strong>Cliente:</strong> Carlos De Almeida</p>
-                    <p class="mb-2"><strong>Código de Rastreio:</strong> <span class="badge bg-secondary">FLX990307</span></p>
-                    <p class="mb-2"><strong>Fragilidade:</strong> Frágil</p>
-                    <p class="mb-2"><strong>Tipo:</strong> Eletrônico</p>
-                    <p class="mb-2"><strong>Remetente:</strong> Mercado Livre</p>
+                    <p class="mb-2"><strong>Cliente:</strong> {{encomenda.nome}}</p>
+                    <p class="mb-2"><strong>Código de Rastreio:</strong> <span class="badge bg-secondary">{{encomenda.codigo_rastreio}}</span></p>
+                    <p class="mb-2"><strong>Fragilidade:</strong> {{encomenda.fragilidade}}</p>
+                    <p class="mb-2"><strong>Tipo:</strong> {{encomenda.tipo}}</p>
+                    <p class="mb-2"><strong>Remetente:</strong> {{encomenda.remetente}}</p>
                 </div>
+                {%endfor%}
             </div>
 
             <div class="modal-footer" style="border-color:#1A6B6E;">
