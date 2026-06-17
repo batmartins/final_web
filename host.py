@@ -1,10 +1,43 @@
 import requests
 
-codigo_host = "http://10.135.232.7:5001"
+codigo_host = "http://127.0.0.1:5001"
 
+
+# ==========================
+# USUÁRIOS
+# ==========================
+
+def post_usuario(nome, email, senha):
+    url = f"{codigo_host}/cadastro_usuario"
+
+    dados = {
+        "nome": nome,
+        "email": email,
+        "senha": senha
+    }
+
+    response = requests.post(url, json=dados)
+    return response.json()
+
+
+def get_usuarios():
+    # Sua API não possui /listar_usuarios
+    return []
+
+
+def buscar_usuario(usuario_id):
+    url = f"{codigo_host}/buscar_usuario/{usuario_id}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# CLIENTES
+# ==========================
 
 def post_clientes(nome, email, senha, endereco):
-    url = f"{codigo_host}/cadastro_clientes"
+    url = f"{codigo_host}/cadastro_cliente"
 
     dados = {
         "nome": nome,
@@ -14,20 +47,29 @@ def post_clientes(nome, email, senha, endereco):
     }
 
     response = requests.post(url, json=dados)
-
     return response.json()
 
 
 def get_clientes():
-    url = f"{codigo_host}/buscar_cliente/1"
+    url = f"{codigo_host}/listar_clientes"
 
     response = requests.get(url)
-
     return response.json()
 
 
+def buscar_cliente(cliente_id):
+    url = f"{codigo_host}/buscar_cliente/{cliente_id}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# ENCOMENDAS
+# ==========================
+
 def post_encomendas(nome, fragilidade, tipo, remetente):
-    url = f"{codigo_host}/cadastro_clientes"
+    url = f"{codigo_host}/cadastro_encomendas"
 
     dados = {
         "nome": nome,
@@ -37,7 +79,6 @@ def post_encomendas(nome, fragilidade, tipo, remetente):
     }
 
     response = requests.post(url, json=dados)
-
     return response.json()
 
 
@@ -45,49 +86,50 @@ def get_encomendas():
     url = f"{codigo_host}/listar_encomendas"
 
     response = requests.get(url)
-
     return response.json()
 
 
-def post_usuario(nome, email, senha, ):
-    url = f"{codigo_host}/cadastro_usuario"
-
-    dados = {
-        "nome": nome,
-        "email": email,
-        "senha": senha
-    }
-    response = requests.post(url, json=dados)
-
-    return response.json()
-def get_usuarios():
-
-    url = f"{codigo_host}/buscar_usuarios"
+def buscar_encomenda(codigo_rastreio):
+    url = f"{codigo_host}/buscar_encomenda/{codigo_rastreio}"
 
     response = requests.get(url)
-
     return response.json()
 
 
+# ==========================
+# GALPÕES
+# ==========================
 
-def post_entregador(nome, veiculo ):
-    url = f"{codigo_host}/cadastro_entregador"
+def post_galpao(nome, localizacao, capacidade):
+    url = f"{codigo_host}/cadastro_galpao"
 
     dados = {
         "nome": nome,
-        "veiculo": veiculo
+        "localizacao": localizacao,
+        "capacidade": capacidade
     }
 
     response = requests.post(url, json=dados)
     return response.json()
 
-def get_entregadores():
-    url = f"{codigo_host}/buscar_entregadores"
+
+def get_galpoes():
+    url = f"{codigo_host}/listar_galpoes"
 
     response = requests.get(url)
-
     return response.json()
 
+
+def buscar_galpao(galpao_id):
+    url = f"{codigo_host}/buscar_galpao/{galpao_id}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# MOVIMENTAÇÕES
+# ==========================
 
 def post_movimentacao(situacao, codigo_rastreio, galpao_id):
     url = f"{codigo_host}/cadastro_movimentacao"
@@ -99,44 +141,86 @@ def post_movimentacao(situacao, codigo_rastreio, galpao_id):
     }
 
     response = requests.post(url, json=dados)
-
     return response.json()
 
 
-def get_galpao():
-    url = f"{codigo_host}/buscar_galpao/1"
-
-    response = requests.post(url)
-
-    return response.json()
-def get_movimentacoes():
+def get_movimentacao():
     url = f"{codigo_host}/listar_movimentacoes"
 
     response = requests.get(url)
-
     return response.json()
 
-def post_veiculo(id, modelo):
+
+def buscar_movimentacao(codigo_rastreio):
+    url = f"{codigo_host}/buscar_movimentacao/{codigo_rastreio}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# ENTREGADORES
+# ==========================
+
+def post_entregador(nome, veiculo):
+    url = f"{codigo_host}/cadastro_entregador"
+
+    dados = {
+        "nome": nome,
+        "veiculo": veiculo
+    }
+
+    response = requests.post(url, json=dados)
+    return response.json()
+
+
+def get_entregadores():
+    # Sua API não possui /listar_entregadores
+    return []
+
+
+def buscar_entregador(entregador_id):
+    url = f"{codigo_host}/buscar_entregador/{entregador_id}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# CENTRO DE TRANSPORTE
+# ==========================
+
+def post_centro_transporte(nome, localizacao):
+    url = f"{codigo_host}/cadastro_centro_transporte"
+
+    dados = {
+        "nome": nome,
+        "localizacao": localizacao
+    }
+
+    response = requests.post(url, json=dados)
+    return response.json()
+
+
+def buscar_centro_transporte(centro_id):
+    url = f"{codigo_host}/buscar_centro_transporte/{centro_id}"
+
+    response = requests.get(url)
+    return response.json()
+
+
+# ==========================
+# VEÍCULOS
+# ==========================
+
+def post_veiculo(modelo):
     url = f"{codigo_host}/cadastro_veiculos"
 
     dados = {
-        "id": id,
-        "modelo": modelo,
+        "modelo": modelo
     }
 
     response = requests.post(url, json=dados)
-
-    return response.json()
-def put_veiculo(id, modelo):
-    url = f"{codigo_host}/editar_veiculo"
-
-    dados = {
-        "id": id,
-        "modelo": modelo,
-    }
-
-    response = requests.post(url, json=dados)
-
     return response.json()
 
 
@@ -144,122 +228,11 @@ def get_veiculos():
     url = f"{codigo_host}/listar_veiculos"
 
     response = requests.get(url)
-
     return response.json()
-def get_veiculos():
-    url = f"{codigo_host}/buscar_veiculo"
+
+
+def buscar_veiculo(veiculo_id):
+    url = f"{codigo_host}/buscar_veiculo/{veiculo_id}"
 
     response = requests.get(url)
-
-    return response.json()
-
-def get_galpoes():
-    url = f"{codigo_host}/listar_galpoes"
-
-    response = requests.get(url)
-
-    return response.json()
-
-def get_movimentacao():
-    url = f"{codigo_host}/buscar_movimentacao/1"
-
-    response = requests.get(url)
-
-    return response.json()
-
-
-def post_galpao(nome, localizacao, capacidade):
-    url = f"{codigo_host}/buscar_galpao"
-
-    dados = {
-        "nome": nome,
-        "localizacao": localizacao,
-        "capacidade": capacidade
-    }
-
-    response = requests.post(url, json=dados)
-
-    return response.json()
-
-
-def put_usuario(id, nome, email, senha):
-    url = f"{codigo_host}/editar_usuario"
-
-    dados = {
-        "id": id,
-        "nome": nome,
-        "email": email,
-        "senha": senha
-    }
-
-    response = requests.put(url, json=dados)
-
-    return response.json()
-
-def put_encomenda(id_, nome_, fragilidade_, tipo_, remetente_):
-    url = f"{codigo_host}/editar_encomenda"
-
-    dados = {
-        "id_": id_,
-        "nome_": nome_,
-        "fragilidade_": fragilidade_,
-        "tipo_": tipo_,
-        "remetente_": remetente_
-    }
-
-    response = requests.put(url, json=dados)
-
-    return response.json()
-
-
-
-def put_cliente(id_, nome_, email_, senha_, endereco_, produto_):
-    url = f"{codigo_host}/editar_cliente"
-
-    dados = {
-        "id_": id_,
-        "nome": nome_,
-        "email": email_,
-        "senha": senha_,
-        "endereco": endereco_,
-        "produto": produto_
-    }
-
-    response = requests.put(url, json=dados)
-
-    return response.json()
-
-
-def put_entregador(id, nome, veiculo):
-    url = f"{codigo_host}/editar_entregador"
-
-    dados = {
-        "id": id,
-        "nome": nome,
-        "veiculo": veiculo
-    }
-
-    response = requests.put(url, json=dados)
-
-    return response.json()
-
-def put_galpao(id_, nome_, locaizacao_, capacidade_):
-    url = f"{codigo_host}/buscar_galpao"
-
-    dados = {
-        "id": id_,
-        "nome": nome_,
-        "localizacao": locaizacao_,
-        "capacidade": capacidade_
-    }
-
-    response = requests.put(url, json=dados)
-
-    return response.json()
-
-
-def get_clientes():
-    url = f"{codigo_host}/listar_clientes"
-    response = requests.get(url)
-
     return response.json()

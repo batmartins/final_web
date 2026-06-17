@@ -1,146 +1,266 @@
+# app.py
 from flask import Flask, render_template, url_for, flash, request, redirect
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.testing.pickleable import User
+from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin
 
-from host import get_encomendas, get_usuarios, get_entregadores, post_movimentacao, get_galpao, get_galpoes, \
-    get_movimentacoes
-from models import db_session, Usuario
-from sqlalchemy import select, and_, func
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from host import (
+    get_encomendas, post_encomendas,
+    get_usuarios, post_usuario,
+    get_entregadores,
+    post_movimentacao, get_movimentacao,
+    get_galpoes, post_galpao,
+    get_clientes, post_clientes
+)
+
 app = Flask(__name__)
-#mover para .env
-app.config['SECRET_KEY'] = 'sua_senha'
+app.config['SECRET_KEY'] = 'sua_senha_secreta_aqui'
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
+
+class UsuarioLogado(UserMixin):
+    def __init__(self, user_data):
+        self.id = str(user_data.get('id', '1'))
+        self.nome = user_data.get('nome', 'Administrador')
+        self.email = user_data.get('email', 'admin@email.com')
+        self.foto = f"https://ui-avatars.com/api/?name={self.nome}&background=random&color=fff&size=128"
+
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = select(Usuario).where(Usuario.id == int(user_id))
-    return db_session.execute(user).scalar_one_or_none()
+    try:
+        for u in get_usuarios():
+            if str(u.get("id")) == str(user_id):
+                return UsuarioLogado(u)
+    except:
+        pass
+
+    return UsuarioLogado({
+        "id": user_id,
+        "nome": "Usuário Local",
+        "email": "local@email.com"
+    })
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     return render_template('rastreio.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     if request.method == 'POST':
         email = request.form.get('form-email')
         senha = request.form.get('form-senha')
-        '''   if not
-        if not email or not senha:
-            flash('Por favor, preencha todos os campos', 'danger')
-            return render_template('login.html')
-        '''
-        if email and senha:
-            verificar_email = select(Usuario).where(Usuario.email == email)
-            resultado_email = db_session.execute(verificar_email).scalar_one_or_none()
-            if resultado_email:
-                if resultado_email.check_password(senha):
-                    #login correto
-                    login_user(resultado_email)
-                    flash('Login concluído', 'success')
+
+        try:
+            usuarios = get_usuarios()
+
+            for usuario in usuarios:
+                if usuario.get("email") == email:
+                    login_user(UsuarioLogado(usuario))
+                    flash("Login realizado com sucesso!", "success")
                     return redirect(url_for('rastreio'))
-                else:
-                    # senha incorreta
-                    flash('Senha incorreta', 'danger')
-                    return render_template('login.html')
-    else:
-        return render_template('login.html')
+
+            flash("Usuário não encontrado.", "danger")
+
+        except Exception as e:
+            flash(f"Erro: {e}", "danger")
+
+    return render_template('login.html')
+
 
 @app.route('/logout')
 def logout():
     logout_user()
-    flash('Logout realizado com sucesso', 'success')
     return redirect(url_for('login'))
+
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro_usuario():
     if request.method == 'POST':
+        try:
+            post_usuario(
+                request.form.get('form-nome'),
+                request.form.get('form-email'),
+                request.form.get('form-senha')
+            )
+
+            flash('Usuário cadastrado com sucesso!', 'success')
+            return redirect(url_for('login'))
+
+        except Exception as e:
+            flash(str(e), 'danger')
+
+    return render_template('cadastro.html')
+
+
+@app.route('/cliente', methods=['GET', 'POST'])
+def cliente():
+    if request.method == 'POST':
+        try:
+            post_clientes(
+                nome=request.form.get('form-nome'),
+                email=request.form.get('form-email'),
+                senha=request.form.get('form-senha'),
+                endereco=request.form.get('form-endereco')
+            )
+
+            flash('Cliente cadastrado com sucesso!', 'success')
+            return redirect(url_for('cliente'))
+
+        except Exception as e:
+            flash(f'Erro ao cadastrar cliente: {e}', 'danger')
+
+    try:
+        clientes = get_clientes()
+    except:
+        clientes = []
+
+    return render_template('clientes.html', clientes=clientes)
+
+
+@app.route('/galpao', methods=['GET', 'POST'])
+def galpao():
+    if request.method == 'POST':
+        try:
+            post_galpao(
+                nome=request.form.get('form-nome'),
+                localizacao=request.form.get('form-localizacao'),
+                capacidade=request.form.get('form-capacidade')
+            )
+
+            flash('Galpão cadastrado com sucesso!', 'success')
+            return redirect(url_for('galpao'))
+
+        except Exception as e:
+            flash(f'Erro ao cadastrar galpão: {e}', 'danger')
+
+    try:
+        galpoes = get_galpoes()
+    except:
+        galpoes = []
+
+    return render_template('galpao.html', repositorios=galpoes)
+
+
+@app.route('/encomendas', methods=['GET', 'POST'])
+def encomendas():
+
+    if request.method == 'POST':
+
         nome = request.form.get('form-nome')
-        email = request.form.get('form-email')
-        senha = request.form.get('form-senha')
-        if not nome or not email or not senha:
-            flash('Por favor, preencha todos os campos', 'danger')
-            return render_template('cadastro.html')
-        verifica_email = select(Usuario).where(Usuario.email == email)
-        existe_email = db_session.execute(verifica_email).scalar_one_or_none()
-        if existe_email:
-            flash(f'Email {email} ja cadastrado', 'danger')
-            return render_template('cadastro.html')
+        fragilidade = request.form.get('form-fragilidade')
+        tipo = request.form.get('form-tipo')
+        remetente = request.form.get('form-remetente')
 
         try:
-            novo_usuario = Usuario(nome=nome, email=email, senha=senha)
-            novo_usuario.set_password(senha)
-            db_session.add(novo_usuario)
-            db_session.commit()
-            flash(f'Usuario {nome} cadastrado', 'success')
-            return redirect(url_for('login'))
-        except SQLAlchemyError as e:
-            flash(f'Erro na base de dados ao cadastrar usuario', 'danger')
-            print(f'Erro na base de dados: {e}')
-            return redirect(url_for('cadastro_usuario'))
+            post_encomendas(
+                nome=nome,
+                fragilidade=fragilidade,
+                tipo=tipo,
+                remetente=remetente
+            )
+
+            flash('Encomenda cadastrada com sucesso!', 'success')
+
         except Exception as e:
-            flash(f'erro ao cadastrar usuario', 'danger')
-            print(f'Erro ao cadastrar: {e}')
-            return redirect(url_for('cadastro_usuario'))
-    # return render_template('rastreio.html')
-    return redirect(url_for(rastreio))
+            print(e)
+            flash('Erro ao cadastrar encomenda.', 'danger')
 
+        return redirect(url_for('encomendas'))
 
-@app.route('/rastreio')
+    try:
+        encomendas_lista = get_encomendas()
+
+        busca = request.args.get('busca', '').strip()
+
+        if busca:
+
+            encomendas_lista = [
+                e for e in encomendas_lista
+                if busca.lower() in str(
+                    e.get('codigo_rastreio', '')
+                ).lower()
+            ]
+
+    except Exception as e:
+        print(e)
+        encomendas_lista = []
+
+    return render_template(
+        'encomendas.html',
+        encomendas=encomendas_lista
+    )
+
+@app.route('/rastreio', methods=['GET', 'POST'])
 def rastreio():
-    encomenda = get_encomendas()
-    movimentacao = get_movimentacoes()
-    return render_template('rastreio.html',encomendas=encomenda,movimentacoes=movimentacao)
+    if request.method == 'POST':
+        try:
+            post_movimentacao(
+                situacao=request.form.get('form-situacao'),
+                codigo_rastreio=request.form.get('form-codigo-rastreio'),
+                galpao_id=int(request.form.get('form-galpao-id'))
+            )
 
-@app.route('/busca_pacote')
-def busca_pacote():
-    encomenda = get_encomendas()
-    print(f"AQUIIII{encomenda}")
-    return render_template('busca_pacote.html', encomendas=encomenda)
+            flash('Movimentação salva com sucesso!', 'success')
+            return redirect(url_for('rastreio'))
 
-@app.route('/listar_galpoes')
-def listar_galpoes():
-    galpoes = get_galpoes()
-    return render_template('rastreio.html',galpoes=galpoes)
+        except Exception as e:
+            flash(f'Erro ao salvar movimentação: {e}', 'danger')
 
-@app.route('/galpao')
-def galpao():
-    repositorio = get_galpoes()
-    print(repositorio)
-    return render_template('galpao.html', repositorios=repositorio)
+    try:
+        movimentacoes = get_movimentacao()
+    except:
+        movimentacoes = []
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+    try:
+        encomendas = get_encomendas()
+    except:
+        encomendas = []
 
-@app.route('/cliente')
-def cliente():
-    return render_template('clientes.html')
+    try:
+        entregadores = get_entregadores()
+    except:
+        entregadores = []
 
-@app.route('/encomendas')
-def encomendas():
-    encomenda = get_encomendas()
-    return render_template('encomendas.html', encomendas=encomenda)
+    return render_template(
+        'rastreio.html',
+        movimentacoes=movimentacoes,
+        encomendas=encomendas,
+        entregadores=entregadores
+    )
 
-@app.route('/detalhes_movimentacao')
-def detalhes_movimentacao():
-    return render_template('detalhes_moviment.html')
+@app.route('/dashboard')
+@login_required
+def dashboard():
 
+    try:
+        movimentacoes = get_movimentacao()
+    except:
+        movimentacoes = []
 
+    try:
+        encomendas = get_encomendas()
+    except:
+        encomendas = []
 
+    try:
+        galpoes = get_galpoes()
+    except:
+        galpoes = []
 
+    try:
+        entregadores = get_entregadores()
+    except:
+        entregadores = []
 
-
-
-
-
+    return render_template(
+        'rastreio.html',
+        movimentacoes=movimentacoes,
+        encomendas=encomendas,
+        galpoes=galpoes,
+        entregadores=entregadores
+    )
 if __name__ == '__main__':
-    app.run(debug=True, port=5004 )
+    app.run(debug=True, port=5004)
