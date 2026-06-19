@@ -90,6 +90,8 @@ def login():
             flash('E-mail ou senha incorretos.', 'danger')
             return render_template('login.html')
 
+
+
         except Exception as e:
             print(f"Erro no login: {e}")
 
