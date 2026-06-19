@@ -64,36 +64,44 @@ def login():
             return render_template('login.html')
 
         try:
-            # Tenta verificar as credenciais buscando no banco de dados da API
             usuarios_api = get_usuarios()
+
+            # 🔥 fallback caso API não tenha lista
+            if not usuarios_api:
+                flash('API não retorna usuários (get_usuarios vazio).', 'danger')
+                return render_template('login.html')
+
             usuario_encontrado = None
 
-            if isinstance(usuarios_api, list):
-                for u in usuarios_api:
-                    if str(u.get('email')).strip() == str(email).strip() and str(u.get('senha')) == str(senha):
-                        usuario_encontrado = u
-                        break
+            for u in usuarios_api:
+                if (
+                    str(u.get('email')).strip() == str(email).strip()
+                    and str(u.get('senha')).strip() == str(senha).strip()
+                ):
+                    usuario_encontrado = u
+                    break
 
             if usuario_encontrado:
                 user_obj = UsuarioLogado(usuario_encontrado)
                 login_user(user_obj)
-                flash('Login concluído com sucesso via API!', 'success')
+                flash('Login realizado com sucesso!', 'success')
                 return redirect(url_for('rastreio'))
-            else:
-                flash('E-mail ou senha incorretos na API.', 'danger')
-                return render_template('login.html')
+
+            flash('E-mail ou senha incorretos.', 'danger')
+            return render_template('login.html')
 
         except Exception as e:
-            # MODO APENAS ENTRAR (Se a API cair ou falhar, permite o login direto)
-            print(f"Erro de conexão com a API ({e}). Forçando entrada direta...")
+            print(f"Erro no login: {e}")
+
+            # fallback seguro
             usuario_simulado = {
                 'id': '999',
-                'nome': email.split('@')[0].capitalize() if email else 'Admin',
+                'nome': email.split('@')[0].capitalize(),
                 'email': email
             }
-            user_obj = UsuarioLogado(usuario_simulado)
-            login_user(user_obj)
-            flash('Servidor offline. Login realizado em modo de contingência local.', 'warning')
+
+            login_user(UsuarioLogado(usuario_simulado))
+            flash('Login em modo offline.', 'warning')
             return redirect(url_for('rastreio'))
 
     return render_template('login.html')
@@ -160,7 +168,8 @@ def rastreio():
     try: movimentacao = get_movimentacao()
     except: movimentacao = []
 
-    return render_template('rastreio.html', entregadores=entregador, movimentacoes=movimentacao, encomendas=encomenda)
+    return render_template('busca_pacote.html')
+
 
 
 @app.route('/detalhes_movimentacao')
@@ -271,6 +280,89 @@ def encomendas():
         encomendas_lista = []
     return render_template('encomendas.html', encomendas=encomendas_lista)
 
+@app.route('/cadastro_encomenda', methods=['GET', 'POST'])
+def cadastro_encomenda():
+    if request.method == 'POST':
+        nome = request.form.get('form-nome')
+        fragilidade = request.form.get('form-fragilidade')
+        tipo = request.form.get('form-tipo')
+        remetente = request.form.get('form-remetente')
 
+        if not all([nome, fragilidade, tipo, remetente]):
+            flash('Por favor, preencha todos os campos.', 'danger')
+            return redirect(url_for('encomendas'))
+
+        try:
+            post_encomendas(
+                nome=nome,
+                fragilidade=fragilidade,
+                tipo=tipo,
+                remetente=remetente
+            )
+            flash(f'Encomenda {nome} cadastrada com sucesso!', 'success')
+        except Exception as e:
+            print(e)
+            flash('Erro ao registrar encomenda no host remoto.', 'danger')
+
+        return redirect(url_for('encomendas'))
+
+    encomendas_lista = get_encomendas()
+    return render_template('encomendas.html', encomendas=encomendas_lista)
+
+@app.route('/cadastrar_galpao', methods=['GET', 'POST'])
+def cadastrar_galpao():
+    if request.method == 'POST':
+        nome = request.form.get('form-nome')
+        localizacao = request.form.get('form-localizacao')
+        capacidade = request.form.get('form-capacidade')
+
+        if not all([nome, localizacao, capacidade]):
+            flash('Por favor, preencha todos os campos.', 'danger')
+            return redirect(url_for('cadastrar_galpao'))
+
+        try:
+            post_galpao(
+                nome=nome,
+                localizacao=localizacao,
+                capacidade=int(capacidade)
+            )
+            flash(f'Galpão {nome} cadastrado com sucesso!', 'success')
+        except Exception as e:
+            print(e)
+            flash('Erro ao registrar galpão no host remoto.', 'danger')
+
+        return redirect(url_for('cadastrar_galpao'))
+
+    galpoes_lista = get_galpoes()
+    return render_template('galpao.html', repositorios=galpoes_lista)
+
+@app.route('/cadastrar_cliente', methods=['GET', 'POST'])
+def cadastrar_cliente():
+    if request.method == 'POST':
+        nome = request.form.get('form-nome')
+        email = request.form.get('form-email')
+        senha = request.form.get('form-senha')
+        endereco = request.form.get('form-endereco')
+
+        if not all([nome, email, senha, endereco]):
+            flash('Por favor, preencha todos os campos.', 'danger')
+            return redirect(url_for('cadastrar_cliente'))
+
+        try:
+            post_clientes(
+                nome=nome,
+                email=email,
+                senha=senha,
+                endereco=endereco
+            )
+            flash(f'Cliente {nome} cadastrado com sucesso!', 'success')
+        except Exception as e:
+            print(e)
+            flash('Erro ao registrar cliente no host remoto.', 'danger')
+
+        return redirect(url_for('cadastrar_cliente'))
+
+    clientes_lista = get_clientes()
+    return render_template('clientes.html', clientes=clientes_lista)
 if __name__ == '__main__':
     app.run(debug=True, port=5004)

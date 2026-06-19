@@ -15,16 +15,14 @@
             </small>
         </div>
 
-        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#modalNovoGalpao">
+        <button class="btn btn-primary-custom"
+                data-bs-toggle="modal"
+                data-bs-target="#modalNovoGalpao">
             <span class="material-symbols-outlined align-middle me-1">
                 add
             </span>
             Novo Galpão
         </button>
-    </div>
-
-    <!-- Cards -->
-    <div class="row g-4 mb-4">
     </div>
 
     <!-- Tabela -->
@@ -50,7 +48,7 @@
                 <tbody>
                 {% for repositorio in repositorios %}
                 <tr>
-                    <td class="tracking-id">{{ repositorio.nome }}</td>
+                    <td>{{ repositorio.nome }}</td>
                     <td>{{ repositorio.localizacao }}</td>
                     <td>{{ repositorio.capacidade }}</td>
                 </tr>
@@ -64,40 +62,48 @@
 </div>
 
 <!-- Modal Novo Galpão -->
-<div class="modal fade" id="modalNovoGalpao" tabindex="-1" aria-labelledby="modalNovoGalpaoLabel" aria-hidden="true">
+<div class="modal fade" id="modalNovoGalpao" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background:#054D50; border:1px solid #1A6B6E; color:#dde4e4;">
+        <div class="modal-content"
+             style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
+
             <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
-                <h5 class="modal-title fw-bold" id="modalNovoGalpaoLabel">Novo Galpão</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title fw-bold">Novo Galpão</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <!-- Mantendo o método POST apontando perfeitamente para a rota /galpao -->
-                <form id="formNovoGalpao" method="POST" action="/galpao">
+
+            <form method="POST" action="{{ url_for('cadastrar_galpao') }}">
+
+                <div class="modal-body">
+
                     <div class="mb-3">
-                        <label for="nome" class="form-label fw-bold">Nome do Galpão</label>
-                        <!-- CORRIGIDO: name alterado para "nome" para casar com request.form.get('nome') -->
-                        <input type="text" class="form-control" id="nome" name="nome"
-                               style="background:#033C3E; border:1px solid #1A6B6E; color:#dde4e4;" placeholder="Ex: WH-SAO-001" required>
+                        <label class="form-label fw-bold">Nome</label>
+                        <input type="text" name="form-nome" class="form-control" required
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                     </div>
+
                     <div class="mb-3">
-                        <label for="localizacao" class="form-label fw-bold">Localização</label>
-                        <!-- CORRIGIDO: name alterado para "localizacao" para casar com request.form.get('localizacao') -->
-                        <input type="text" class="form-control" id="localizacao" name="localizacao"
-                               style="background:#033C3E; border:1px solid #1A6B6E; color:#dde4e4;" placeholder="Ex: São Paulo - SP" required>
+                        <label class="form-label fw-bold">Localização</label>
+                        <input type="text" name="form-localizacao" class="form-control" required
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                     </div>
+
                     <div class="mb-3">
-                        <label for="capacidade" class="form-label fw-bold">Capacidade (%)</label>
-                        <!-- CORRIGIDO: name alterado para "capacidade" para casar com request.form.get('capacidade') -->
-                        <input type="number" class="form-control" id="capacidade" name="capacidade" min="0" max="100"
-                               style="background:#033C3E; border:1px solid #1A6B6E; color:#dde4e4;" placeholder="Ex: 94" required>
+                        <label class="form-label fw-bold">Capacidade (%)</label>
+                        <input type="number" name="form-capacidade" min="0" max="100"
+                               class="form-control" required
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer" style="border-color:#1A6B6E;">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="submit" form="formNovoGalpao" class="btn-primary-custom">Salvar</button>
-            </div>
+
+                </div>
+
+                <div class="modal-footer" style="border-color:#1A6B6E;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn-primary-custom">Salvar</button>
+                </div>
+
+            </form>
+
         </div>
     </div>
 </div>
