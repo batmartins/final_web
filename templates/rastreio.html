@@ -6,211 +6,188 @@
 
     <!-- Cabeçalho -->
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-
         <div>
             <h2 class="fw-bold underline_azul mb-1">
                 Dashboard Operacional
             </h2>
+
             <small class="text-muted">
                 Monitoramento logístico em tempo real
             </small>
         </div>
+    </div>
 
+    <div class="row g-4">
 
-        <!-- Conteúdo Principal -->
-        <div class="row g-4">
+        <!-- TABELA PRINCIPAL -->
+        <div class="col-lg-8">
 
-            <!-- Tabela -->
-            <div class="col-lg-8">
-                <div class="table-container">
+            <div class="table-container">
 
-                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
-                         style="border-color:var(--border-color)!important;">
-                        <div>
-                            <h5 class="fw-bold underline_azul mb-0">Remessas ao Vivo</h5>
-                            <small class="text-muted">
-                                <span class="me-1" style="color:#06C7CE;">●</span> LIVE
-                            </small>
-                        </div>
-                        <div class="d-flex gap-2 align-items-center">
-                            <input type="text"
-                                   class="form-control form-control-sm"
-                                   placeholder="Buscar ID..."
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;width:160px;">
-                            <button class="btn btn-sm btn-outline-info">
-                                <span class="material-symbols-outlined align-middle" style="font-size:16px;">tune</span>
-                            </button>
-                        </div>
+                <div class="d-flex justify-content-between align-items-center p-4 border-bottom"
+                     style="border-color:var(--border-color)!important;">
+
+                    <div>
+                        <h5 class="fw-bold underline_azul mb-0">
+                            Remessas ao Vivo
+                        </h5>
+
+                        <small class="text-muted">
+                            <span class="me-1" style="color:#06C7CE;">●</span>
+                            LIVE
+                        </small>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table mb-0 align-middle">
-                            <thead>
+                    <div class="d-flex gap-2 align-items-center">
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               placeholder="Buscar ID..."
+                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;width:160px;">
+
+                        <button class="btn btn-sm btn-outline-info">
+                            <span class="material-symbols-outlined"
+                                  style="font-size:16px;">
+                                tune
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table mb-0 align-middle">
+
+                        <thead>
                             <tr>
-                                <th>CODIGO DE RASTREIO</th>
-                                <th>ORIGEM / DEST.</th>
+                                <th>CÓDIGO</th>
+                                <th>LOCALIZAÇÃO</th>
                                 <th>VEÍCULO</th>
-                                <th>STATUS</th>
-                                <th></th>
-
+                                <th>SITUAÇÃO</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+
+                        <tbody>
+
+                        {% for movimentacao in movimentacoes %}
 
                             <tr>
-                                {% for movimentacao in movimentacoes %}
-                                <td class="tracking-id">{{movimentacao.codigo_rastreio}}</td>
 
-                                <td><small class="text-muted">{{movimentacao.localizacao}}</small></td>
+                                <td class="tracking-id">
+                                    {{ movimentacao.codigo_rastreio }}
+                                </td>
 
-                                <td>{{movimentacao.veiculo}}</td>
+                                <td>
+                                    {{ movimentacao.localizacao }}
+                                </td>
 
-                                <td><span class="status-pill text-info">{{encomenda.fragilidade}}</span></td>
-                                {%endfor%}
+                                <td>
+                                    {{ movimentacao.veiculo }}
+                                </td>
+
+                                <td>
+                                    <span class="status-pill text-info">
+                                        {{ movimentacao.situacao }}
+                                    </span>
+                                </td>
+
                             </tr>
 
+                        {% endfor %}
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
 
+                    </table>
 
                 </div>
 
             </div>
+
         </div>
 
-        <!-- Painel Lateral -->
-        <div class="col-lg-4 d-flex flex-column gap-4">
+        <!-- LATERAL -->
+        <div class="col-lg-4">
 
-            <!-- Atividade Recente -->
-
-
-            <!-- Galpões -->
+            <!-- GALPÕES -->
             <div class="card-custom">
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="underline_azul fw-bold mb-0">Galpões</h5>
-                    <a href="/galpao" class="btn btn-sm btn-outline-info">Ver todos</a>
+
+                    <h5 class="underline_azul fw-bold mb-0">
+                        Galpões
+                    </h5>
+
+                    <a href="/galpao"
+                       class="btn btn-sm btn-outline-info">
+                        Ver todos
+                    </a>
+
                 </div>
+
                 {% for galpao in galpoes %}
+
                 <div class="mb-3">
+
                     <div class="d-flex justify-content-between mb-1">
-                        <small class="fw-bold">{{galpoes.nome}}</small>
-                        <small class="text-info">?%</small>
+
+                        <small class="fw-bold">
+                            {{ galpao.nome }}
+                        </small>
+
+                        <small class="text-info">
+                            {{ galpao.capacidade }}%
+                        </small>
+
                     </div>
-                    <div class="progress" style="height:5px;background:#033C3E;">
-                        <div class="progress-bar bg-info" style="width:94%"></div>
+
+                    <div class="progress"
+                         style="height:5px;background:#033C3E;">
+                        {%for in galpao in galpoes%}
+                        <div class="progress-bar bg-info">
+                             {{galpao.capacidade}}
+                        </div>
+
                     </div>
+
                 </div>
+
                 {% endfor %}
+
             </div>
-        </div>
-    </div>
-</div>
-</div>
 
-<!-- Status -->
+            <!-- ESTATÍSTICAS -->
+            <div class="card-custom mt-4">
 
-
-<!-- Modal Gerar Relatório -->
-<div class="modal fade" id="modalRelatorio" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content"
-             style="background:#054D50;border:1px solid #1A6B6E;color:#dde4e4;">
-
-            <div class="modal-header border-bottom" style="border-color:#1A6B6E !important;">
-                <h5 class="modal-title fw-bold">
-                    <span class="material-symbols-outlined align-middle me-2">analytics</span>
-                    Gerar Relatório
+                <h5 class="underline_azul fw-bold mb-3">
+                    Estatísticas
                 </h5>
-                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
 
-            <div class="modal-body">
-                <div class="row g-3">
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Tipo de Relatório</label>
-                        <select class="form-select"
-                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                            <option>Remessas por período</option>
-                            <option>Desempenho de entregas</option>
-                            <option>Ocupação de galpões</option>
-                            <option>Clientes por volume</option>
-                            <option>Atrasos e ocorrências</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Formato de Saída</label>
-                        <select class="form-select"
-                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                            <option>PDF</option>
-                            <option>Excel (.xlsx)</option>
-                            <option>CSV</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Data Início</label>
-                        <input type="date" class="form-control"
-                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Data Fim</label>
-                        <input type="date" class="form-control"
-                               style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Galpão</label>
-                        <select class="form-select"
-                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                            <option value="">Todos</option>
-                            <option>WH-SAO-001</option>
-                            <option>WH-CUR-012</option>
-                            <option>WH-BHZ-003</option>
-                            <option>WH-RJO-004</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Status</label>
-                        <select class="form-select"
-                                style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
-                            <option value="">Todos</option>
-                            <option>Em Trânsito</option>
-                            <option>Entregue</option>
-                            <option>Atrasado</option>
-                            <option>Exceção</option>
-                        </select>
-                    </div>
-
-                    <div class="col-12">
-                        <label class="form-label fw-bold">Observações</label>
-                        <textarea class="form-control" rows="3"
-                                  placeholder="Alguma observação adicional para o relatório..."
-                                  style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;"></textarea>
-                    </div>
-
+                <div class="mb-2">
+                    <strong>Encomendas:</strong>
+                    {{ encomendas|length }}
                 </div>
-            </div>
 
-            <div class="modal-footer" style="border-color:#1A6B6E;">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button type="button" class="btn-primary-custom">
-                    <span class="material-symbols-outlined align-middle me-1" style="font-size:18px;">
-                        download
-                    </span>
-                    Gerar e Baixar
-                </button>
+                <div class="mb-2">
+                    <strong>Movimentações:</strong>
+                    {{ movimentacoes|length }}
+                </div>
+
+                <div class="mb-2">
+                    <strong>Galpões:</strong>
+                    {{ galpoes|length }}
+                </div>
+
+                <div class="mb-2">
+                    <strong>Entregadores:</strong>
+                    {{ entregadores|length }}
+                </div>
+
             </div>
 
         </div>
+
     </div>
+
 </div>
 
 {% endblock %}
