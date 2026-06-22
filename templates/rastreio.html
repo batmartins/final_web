@@ -142,10 +142,11 @@
 
                     <div class="progress"
                          style="height:5px;background:#033C3E;">
-                        {%for in galpao in galpoes%}
+                        {%for galpao in galpoes%}
                         <div class="progress-bar bg-info">
                              {{galpao.capacidade}}
                         </div>
+                        {% endfor %}
 
                     </div>
 

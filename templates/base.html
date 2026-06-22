@@ -57,14 +57,11 @@
 
 
 
+
+
+
             <a class="sidebar-link {% if request.endpoint == 'rastreio' %}active{% endif %}"
                href="{{ url_for('rastreio') }}">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span>Dashboard</span>
-            </a>
-
-            <a class="sidebar-link {% if request.endpoint == 'busca_pacote' %}active{% endif %}"
-               href="{{ url_for('busca_pacote') }}">
                 <span class="material-symbols-outlined">search</span>
                 <span>Rastreio</span>
             </a>
@@ -116,11 +113,9 @@
 
 <!-- Bottom Nav (Mobile) -->
 <nav class="bottom-nav">
-    <a href="{{ url_for('rastreio') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
-        <span class="material-symbols-outlined" style="font-size:22px;">dashboard</span>
-        Dashboard
+
     </a>
-    <a href="{{ url_for('busca_pacote') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
+    <a href="{{ url_for('rastreio') }}" class="d-flex flex-column align-items-center text-muted" style="font-size:11px;text-decoration:none;">
         <span class="material-symbols-outlined" style="font-size:22px;">search</span>
         Rastreio
     </a>

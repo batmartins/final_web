@@ -55,52 +55,32 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
+    print("entrou na funcao")
     if request.method == 'POST':
-
+        print("entrou no post da funcao")
         email = request.form.get('form-email')
+        print("email:", email)
         senha = request.form.get('form-senha')
+        print("senha:", senha)
 
         try:
-
             usuarios = get_usuarios()
-
+            print("usuarios:", usuarios)
             for usuario in usuarios:
+                print(usuario.get("email") == email)
+                print(type(usuario.get("email")))
+                if usuario.get("email") == email:
+                    print("logado")
+                    login_user(UsuarioLogado(usuario))
+                    flash("Login realizado com sucesso!", "success")
+                    return redirect(url_for('rastreio'))
 
-                email_api = usuario.get("email")
-                senha_api = usuario.get("senha")
-
-                if (
-                    email_api == email
-                    and senha_api == senha
-                ):
-
-                    login_user(
-                        UsuarioLogado(usuario)
-                    )
-
-                    flash(
-                        "Login realizado com sucesso!",
-                        "success"
-                    )
-
-                    return redirect(
-                        url_for('rastreio')
-                    )
-
-            flash(
-                "Email ou senha incorretos.",
-                "danger"
-            )
+            flash("Usuário não encontrado.", "danger")
 
         except Exception as e:
+            flash(f"Erro: {e}", "danger")
 
-            flash(
-                f"Erro: {str(e)}",
-                "danger"
-            )
-
-    return render_template('busca_pacote.html')
+    return render_template('login.html')
 
 
 @app.route('/logout')
@@ -360,9 +340,5 @@ def cadastrar_cliente():
 
     clientes_lista = get_clientes()
     return render_template('clientes.html', clientes=clientes_lista)
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True, port=5004)

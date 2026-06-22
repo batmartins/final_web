@@ -21,8 +21,11 @@ def post_usuario(nome, email, senha):
 
 
 def get_usuarios():
-    # Sua API não possui /listar_usuarios
-    return []
+    url = f"{codigo_host}/listar_usuarios"
+
+    response = requests.get(url)
+    print(response.json())
+    return response.json()
 
 
 def buscar_usuario(usuario_id):
@@ -62,7 +65,6 @@ def buscar_cliente(cliente_id):
 
     response = requests.get(url)
     return response.json()
-
 
 
 # ==========================

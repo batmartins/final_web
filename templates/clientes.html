@@ -93,11 +93,16 @@
                         </div>
 
                         <div class="col-md-6">
+                            <label class="form-label fw-bold">CEP</label>
+                            <input type="text" name="form-endereco" class="form-control" required
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;" id="form-cep">
+                            <button type="submit" onclick="get_cep()" class="btn btn-primary"></button>
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label fw-bold">Endereço</label>
                             <input type="text" name="form-endereco" class="form-control" required
-                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;">
+                                   style="background:#033C3E;border:1px solid #1A6B6E;color:#dde4e4;" id="form-endereco">
                         </div>
-
                     </div>
                 </div>
 
@@ -112,5 +117,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    async function get_cep() {
+        const input_cep = document.getElementById('form-cep')
+
+        let url = "https://viacep.com.br/ws/"+ input_cep.value + "/json/"
+        let result = await fetch(url)
+
+        if (result.ok) {
+            let dados = await result.json()
+            const input_endereco = document.getElementById('form-endereco')
+
+            input_endereco.value = dados.logradouro +' '+ dados.bairro + ' ' + dados.localidade +'/'+ dados.uf
+
+        }
+    }
+
+
+</script>
 
 {% endblock %}
