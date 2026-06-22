@@ -155,7 +155,7 @@ def detalhes_movimentacao():
         movimentacoes = get_movimentacao()
     except:
         movimentacoes = []
-    return render_template('detalhes_moviment.html', movimentacoes=movimentacoes)
+    return render_template('movimentacao.html', movimentacoes=movimentacoes)
 
 
 @app.route('/busca_pacote')
@@ -338,7 +338,33 @@ def cadastrar_cliente():
 
         return redirect(url_for('cadastrar_cliente'))
 
+@app.route('/cadastrar_movimentacao', methods=['GET', 'POST'])
+def cadastrar_movimentacao():
+    if request.method == 'POST':
+        nome = request.form.get('form-nome')
+        email = request.form.get('form-email')
+        senha = request.form.get('form-senha')
+        endereco = request.form.get('form-endereco')
+
+        if not all([nome, email, senha, endereco]):
+            flash('Por favor, preencha todos os campos.', 'danger')
+            return redirect(url_for('cadastrar_cliente'))
+
+        try:
+            post_clientes(
+                nome=nome,
+                email=email,
+                senha=senha,
+                endereco=endereco
+            )
+            flash(f'Cliente {nome} cadastrado com sucesso!', 'success')
+        except Exception as e:
+            print(e)
+            flash('Erro ao registrar cliente no host remoto.', 'danger')
+
+        return redirect(url_for('cadastrar_cliente'))
+
     clientes_lista = get_clientes()
-    return render_template('clientes.html', clientes=clientes_lista)
+    return render_template('movimentacao.html', clientes=clientes_lista)
 if __name__ == '__main__':
-    app.run(debug=True, port=5004)
+    app.run(debug=True, port=5004,host="0.0.0.0")
