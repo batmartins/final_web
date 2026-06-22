@@ -96,45 +96,68 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form method="POST" action="/movimentacoes/registrar">
+            <form method="POST" action="{{ url_for('cadastrar_movimentacao') }}">
+
                 <div class="modal-body">
 
                     <div class="mb-3">
-                        <label>Localização</label>
-                        <input type="text" name="localizacao" class="form-control" required>
+                        <label>Código de Rastreio</label>
+                        <input
+                            type="text"
+                            name="form-codigo_rastreio"
+                            class="form-control"
+                            required>
                     </div>
 
                     <div class="mb-3">
-                        <label>Descrição</label>
-                        <input type="text" name="descricao" class="form-control" required>
+                        <label>Situação</label>
+                        <input
+                            type="text"
+                            name="form-situacao"
+                            class="form-control"
+                            required>
                     </div>
 
                     <div class="mb-3">
-                        <label>Status</label>
-                        <select name="status" class="form-control">
-                            <option value="">Manter atual</option>
-                            <option value="Em Trânsito">Em Trânsito</option>
-                            <option value="Entregue">Entregue</option>
-                            <option value="Atrasada">Atrasada</option>
-                            <option value="Exceção">Exceção</option>
+                        <label>Galpão</label>
+                        <select
+                            name="form-galpao_id"
+                            class="form-control"
+                            required>
+
+                            <option value="">Selecione um galpão</option>
+
+                            {% for galpao in galpoes %}
+                            <option value="{{ galpao.id }}">
+                                {{ galpao.nome }}
+                            </option>
+                            {% endfor %}
+
                         </select>
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
                         Cancelar
                     </button>
 
-                    <button type="submit" class="btn btn-success">
+                    <button
+                        type="submit"
+                        class="btn btn-success">
                         Registrar
                     </button>
                 </div>
+
             </form>
 
         </div>
     </div>
+</div>
 </div>
 
 <!-- ================= MODAL VER ================= -->

@@ -55,58 +55,52 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     if request.method == 'POST':
+
         email = request.form.get('form-email')
         senha = request.form.get('form-senha')
 
-        if not email or not senha:
-            flash('Por favor, preencha todos os campos.', 'danger')
-            return render_template('login.html')
-
         try:
-            usuarios_api = get_usuarios()
 
-            # 🔥 fallback caso API não tenha lista
-            if not usuarios_api:
-                flash('API não retorna usuários (get_usuarios vazio).', 'danger')
-                return render_template('login.html')
+            usuarios = get_usuarios()
 
-            usuario_encontrado = None
+            for usuario in usuarios:
 
-            for u in usuarios_api:
+                email_api = usuario.get("email")
+                senha_api = usuario.get("senha")
+
                 if (
-                    str(u.get('email')).strip() == str(email).strip()
-                    and str(u.get('senha')).strip() == str(senha).strip()
+                    email_api == email
+                    and senha_api == senha
                 ):
-                    usuario_encontrado = u
-                    break
 
-            if usuario_encontrado:
-                user_obj = UsuarioLogado(usuario_encontrado)
-                login_user(user_obj)
-                flash('Login realizado com sucesso!', 'success')
-                return redirect(url_for('rastreio'))
+                    login_user(
+                        UsuarioLogado(usuario)
+                    )
 
-            flash('E-mail ou senha incorretos.', 'danger')
-            return render_template('login.html')
+                    flash(
+                        "Login realizado com sucesso!",
+                        "success"
+                    )
 
+                    return redirect(
+                        url_for('rastreio')
+                    )
 
+            flash(
+                "Email ou senha incorretos.",
+                "danger"
+            )
 
         except Exception as e:
-            print(f"Erro no login: {e}")
 
-            # fallback seguro
-            usuario_simulado = {
-                'id': '999',
-                'nome': email.split('@')[0].capitalize(),
-                'email': email
-            }
+            flash(
+                f"Erro: {str(e)}",
+                "danger"
+            )
 
-            login_user(UsuarioLogado(usuario_simulado))
-            flash('Login em modo offline.', 'warning')
-            return redirect(url_for('rastreio'))
-
-    return render_template('login.html')
+    return render_template('busca_pacote.html')
 
 
 @app.route('/logout')
@@ -366,5 +360,9 @@ def cadastrar_cliente():
 
     clientes_lista = get_clientes()
     return render_template('clientes.html', clientes=clientes_lista)
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5004)
